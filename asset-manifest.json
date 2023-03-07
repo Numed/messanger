@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/messanger1/static/css/main.479b8161.css",
-    "main.js": "/messanger1/static/js/main.bd7c1199.js",
-    "static/media/error.gif": "/messanger1/static/media/error.134f20a351edb0b1d08e.gif",
-    "static/media/avatar.jpg": "/messanger1/static/media/avatar.52c40d586c7bd9612bac.jpg",
-    "index.html": "/messanger1/index.html",
-    "main.479b8161.css.map": "/messanger1/static/css/main.479b8161.css.map",
-    "main.bd7c1199.js.map": "/messanger1/static/js/main.bd7c1199.js.map"
+    "main.css": "/messanger/static/css/main.479b8161.css",
+    "main.js": "/messanger/static/js/main.fa8bcabb.js",
+    "static/media/error.gif": "/messanger/static/media/error.134f20a351edb0b1d08e.gif",
+    "static/media/avatar.jpg": "/messanger/static/media/avatar.52c40d586c7bd9612bac.jpg",
+    "index.html": "/messanger/index.html",
+    "main.479b8161.css.map": "/messanger/static/css/main.479b8161.css.map",
+    "main.fa8bcabb.js.map": "/messanger/static/js/main.fa8bcabb.js.map"
   },
   "entrypoints": [
     "static/css/main.479b8161.css",
-    "static/js/main.bd7c1199.js"
+    "static/js/main.fa8bcabb.js"
   ]
 }
