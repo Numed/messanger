@@ -10,7 +10,7 @@ import {
   Date,
 } from "../ChatSide/style";
 import { Avatar } from "../SideMenu/style";
-import InfoContext from "../Context";
+import { InfoContext } from "../Context";
 
 const Layout = () => {
   const { selectedUser } = useContext(InfoContext);

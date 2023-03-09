@@ -95,6 +95,13 @@ export const CircleActive = styled.span`
   }
 `;
 
+export const AvatarContainer = styled.div`
+  width: 15%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
 export const Avatar = styled.div`
   width: 30px;
   height: 30px;
@@ -102,4 +109,45 @@ export const Avatar = styled.div`
   position: relative;
   background: url(${avatar}) no-repeat center;
   background-size: cover;
+`;
+
+export const AvatarName = styled.h3`
+  font-size: 14px;
+  letter-spacing: 1.1px;
+  color: #303236;
+  padding: 0 15px;
+`;
+
+export const SignInMessage = styled.h3`
+  font-size: 14px;
+  letter-spacing: 1.1px;
+  color: #303236;
+`;
+
+export const SignIn = styled.button`
+  cursor: pointer;
+  background: none;
+  display: flex;
+  align-items: center;
+  border: none;
+  width: 100%;
+
+  i {
+    padding-left: 10px;
+    transform: scale(1.2);
+  }
+`;
+
+export const SignOut = styled.button`
+  cursor: pointer;
+  background: none;
+  display: flex;
+  align-items: center;
+  border: none;
+  width: 32px;
+  height: 32px;
+
+  i {
+    transform: scale(1.2);
+  }
 `;

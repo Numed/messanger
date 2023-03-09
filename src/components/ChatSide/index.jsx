@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import { AvatarName } from "../SideMenu/style";
-import InfoContext from "../Context";
+import { InfoContext } from "../Context";
 import {
   ChatContainer,
   ChatContainerInner,
@@ -13,12 +13,8 @@ import {
   BtnBack,
   InputInner,
 } from "./style";
-import {
-  getFullDate,
-  notify,
-} from "../../helpers";
-import {  CreateInterlocutorMessage,
-  CreateMyMessage} from "../../services"
+import { getFullDate, notify } from "../../helpers";
+import { CreateInterlocutorMessage, CreateMyMessage } from "../../services";
 import { useHttp } from "../../hooks/https.hook";
 import Layout from "../LayoutChat";
 import ErrorMessage from "../ErrorMessage";

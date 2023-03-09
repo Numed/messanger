@@ -45,7 +45,11 @@ body.dark-mode .chat-inner::-webkit-scrollbar-thumb {
   background-color: #ffffff;
 }
 
-body.dark-mode .fa-long-arrow-alt-left {
+body.dark-mode .fa-long-arrow-alt-left, 
+body.dark-mode .fa-sign-in-alt, 
+body.dark-mode .fa-times, 
+body.dark-mode .fa-sign-out-alt
+{
   color: #faf8fc;
 }
 
@@ -55,4 +59,9 @@ body.dark-mode .chat-inner::-webkit-scrollbar-track {
 
 .Toastify__toast-theme--dark {
   background: #303236 !important;
+}
+
+body.dark-mode .welcome-message,
+body.dark-mode .sign-message{
+  color: #d9d9d9;
 }

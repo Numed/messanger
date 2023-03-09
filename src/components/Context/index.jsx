@@ -1,5 +1,7 @@
 import { createContext } from "react";
 
-const InfoContext = createContext();
+export const InfoContext = createContext();
 
-export default InfoContext;
+export const ChatListContext = createContext();
+
+export const PopupContext = createContext();
