@@ -4,4 +4,4 @@ export const InfoContext = createContext();
 
 export const ChatListContext = createContext();
 
-export const PopupContext = createContext();
+export const LoginContext = createContext();

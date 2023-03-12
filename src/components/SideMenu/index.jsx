@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import {
   Container,
-  Moon,
   SideMenuContainer,
   WaitSection,
   WaitMessage,
@@ -10,7 +9,7 @@ import ChatSide from "../ChatSide";
 import { InfoContext, ChatListContext } from "../Context";
 import ErrorBoundary from "../ErrorBoundary";
 import { contacts } from "../Constants";
-import { sortChats, onDarkMode } from "../../helpers";
+import { sortChats } from "../../helpers";
 import ChatListSection from "../ChatList";
 
 const SideMenu = () => {
@@ -26,15 +25,8 @@ const SideMenu = () => {
       : contacts
   );
   const [countMessage, setCountMessage] = useState([]);
-  const [darkMode, setDarkMode] = useState(localStorage.getItem("dark-mode"));
 
-  const sideMenuRef = useRef(),
-    moonRef = useRef();
-
-  useEffect(() => {
-    onDarkMode(moonRef, darkMode);
-    // eslint-disable-next-line
-  }, [darkMode]);
+  const sideMenuRef = useRef();
 
   useEffect(() => {
     setInfo(sortChats(messages, info));
@@ -62,23 +54,22 @@ const SideMenu = () => {
       </WaitSection>
     );
 
-  //TODO: рефакторинг цієї секції
   return (
     <>
       <Container>
         <SideMenuContainer ref={sideMenuRef} className="side-container">
           <ChatListContext.Provider
-            value={{ selectedUser, setSelectedUser, countMessage, sideMenuRef, info, messages }}
+            value={{
+              selectedUser,
+              setSelectedUser,
+              countMessage,
+              sideMenuRef,
+              info,
+              messages,
+            }}
           >
             <ChatListSection />
           </ChatListContext.Provider>
-          <Moon
-            className="fas fa-moon"
-            ref={moonRef}
-            onClick={() =>
-              darkMode === "light" ? setDarkMode("dark") : setDarkMode("light")
-            }
-          />
         </SideMenuContainer>
         {content}
       </Container>

@@ -2,13 +2,10 @@ import styled from "styled-components";
 import bg from "../../img/SignIn/bg.svg";
 
 export const PopupContainer = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25);
-  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 90vh;
 `;
 
 export const PopupForm = styled.div`
@@ -20,25 +17,17 @@ export const PopupForm = styled.div`
   height: 70%;
   position: relative;
   z-index: 101;
-`;
 
-export const BtnClose = styled.button`
-  position: absolute;
-  top: 20px;
-  right: 10px;
-  cursor: pointer;
-  background: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  width: 32px;
-  height: 32px;
-  z-index: 102;
+  @media (max-width: 1024px) {
+    width: 90%;
+  }
 
-  i {
-    transform: scale(1.5);
-    pointer-events: none;
+  @media (max-width: 426px) {
+    height: 90%;
+  }
+
+  @media (max-width: 380px) {
+    width: 95%;
   }
 `;
 
@@ -48,6 +37,11 @@ export const FormInner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 426px) {
+    flex-direction: column-reverse;
+    height: 75%;
+  }
 `;
 
 export const FormTitle = styled.h3`
@@ -56,6 +50,12 @@ export const FormTitle = styled.h3`
   color: #fff;
   font-size: 18px;
   margin-bottom: 10px;
+
+  @media (max-width: 426px) {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+  }
 `;
 
 export const FormSocial = styled.div`
@@ -65,10 +65,18 @@ export const FormSocial = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 426px) {
+    width: 50%;
+  }
+
+  @media (max-width: 325px) {
+    width: 66.6%;
+  }
 `;
 
 export const GoogleButton = styled.button`
-  width: 80%;
+  width: 90%;
   background-color: #db4437;
   border: none;
   color: #fff;
@@ -92,6 +100,17 @@ export const GoogleButton = styled.button`
     margin-right: 10px;
     pointer-events: none;
   }
+
+  @media (max-width: 1024px) {
+    padding: 5px 15px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 426px) {
+    width: 100%;
+    font-size: 13px;
+    padding: 6px 15px;
+  }
 `;
 
 export const FacebookButton = styled(GoogleButton)`
@@ -107,6 +126,11 @@ export const Separator = styled.span`
   height: 100%;
   background-color: #d9d9d9;
   margin: 0 40px;
+
+  @media (max-width: 426px) {
+    transform: rotate(90deg);
+    margin: 0;
+  }
 `;
 
 export const LoginSection = styled.div`
@@ -116,6 +140,14 @@ export const LoginSection = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  @media (max-width: 426px) {
+    width: 50%;
+  }
+
+  @media (max-width: 380px) {
+    width: 66.6%;
+  }
 `;
 
 export const InputSection = styled.div`
@@ -127,6 +159,9 @@ export const InputSection = styled.div`
 export const InputLabel = styled.label`
   margin-bottom: 5px;
   color: #fff;
+  @media (max-width: 426px) {
+    font-size: 13px;
+  }
 `;
 
 export const InputError = styled.span`
@@ -137,13 +172,21 @@ export const InputError = styled.span`
 
 export const FormInput = styled.input`
   width: 100%;
-  color: #fff;
   font-size: 14px;
   font-weight: 400;
   padding: 2px 35px 2px 0;
   color: #373b3e;
   letter-spacing: -0.05px;
   outline: none;
+  border: none;
+  background: none;
+  border-bottom: 1px solid #d9d9d9;
+
+  &:active,
+  &:focus {
+    border-bottom: 1px solid #2f8dee;
+    transition: all 0.2s linear;
+  }
 `;
 
 export const BtnLogin = styled.button`

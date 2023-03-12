@@ -1,8 +1,7 @@
-import { useRef, useContext } from "react";
+import { useContext } from "react";
 import {
   PopupContainer,
   PopupForm,
-  BtnClose,
   FormInner,
   FormTitle,
   FormSocial,
@@ -16,26 +15,15 @@ import {
   FormInput,
   BtnLogin,
 } from "./styles";
-import { PopupContext } from "../Context";
+import { LoginContext } from "../Context";
 
 const SignInSection = () => {
-  const popupRef = useRef(),
-    buttonCloseRef = useRef();
 
-  const { setLogined, setOpenPopup } = useContext(PopupContext);
-
-  const onClosePopup = (target) => {
-    if (target === popupRef.current || target === buttonCloseRef.current) {
-      setOpenPopup(false);
-    }
-  };
+  const { setLogined } = useContext(LoginContext);
 
   return (
-    <PopupContainer ref={popupRef} onClick={(e) => onClosePopup(e.target)}>
+    <PopupContainer>
       <PopupForm>
-        <BtnClose ref={buttonCloseRef} onClick={(e) => onClosePopup(e.target)}>
-          <i className="fas fa-times" />
-        </BtnClose>
         <FormInner>
           <FormSocial>
             <GoogleButton>
@@ -56,11 +44,11 @@ const SignInSection = () => {
             <FormTitle>Sign in by email</FormTitle>
             <InputSection>
               <InputLabel>Email</InputLabel>
-              <FormInput type="text" />
+              <FormInput type="text" required />
             </InputSection>
             <InputSection>
               <InputLabel>Password</InputLabel>
-              <FormInput type="password" />
+              <FormInput type="password" required />
             </InputSection>
             <BtnLogin>Sign in</BtnLogin>
           </LoginSection>

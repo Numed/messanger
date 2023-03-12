@@ -96,7 +96,6 @@ export const CircleActive = styled.span`
 `;
 
 export const AvatarContainer = styled.div`
-  width: 15%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -130,8 +129,6 @@ export const SignIn = styled.button`
   display: flex;
   align-items: center;
   border: none;
-  width: 100%;
-
   i {
     padding-left: 10px;
     transform: scale(1.2);
