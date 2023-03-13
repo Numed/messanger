@@ -12,6 +12,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
+    "reactjs-social-login": "^2.6.2",
     "styled-components": "^5.3.8",
     "web-vitals": "^2.1.4"
   },
@@ -19,7 +20,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-   "deploy": "gh-pages -b gh-pages -d build",
+    "deploy": "gh-pages -b gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

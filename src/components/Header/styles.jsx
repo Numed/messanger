@@ -106,7 +106,10 @@ export const Avatar = styled.div`
   height: 30px;
   border-radius: 20px;
   position: relative;
-  background: url(${avatar}) no-repeat center;
+  background: ${(props) =>
+    props.bg
+      ? `url(${props.bg}) no-repeat center`
+      : `url(${avatar}) no-repeat center`};
   background-size: cover;
 `;
 

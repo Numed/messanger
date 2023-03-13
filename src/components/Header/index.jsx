@@ -19,25 +19,33 @@ const Header = () => {
   const { useDebounce } = useHttp();
   const [searchValue, setSearchValue] = useState("");
   const searchTerm = useDebounce(searchValue.trim().toLowerCase(), 300);
-  const { logined } = useContext(LoginContext);
+  const { logined, setLogined, user } = useContext(LoginContext);
 
   useEffect(() => {
     findUser(searchTerm);
     // eslint-disable-next-line
   }, [searchValue]);
 
+  //GOOGLe picture and given_name
+  //Facebook short_name picture.data.url
+  //Github login and avatar_url
+
   const LoginContent = () => {
     return (
       <>
-        <Avatar>
+        <Avatar bg={user.image}>
           <CircleActive />
         </Avatar>
-        <AvatarName className="welcome-message">Hello, Eugene</AvatarName>
-        <SignOut>
+        <AvatarName className="welcome-message">Hello, {user.name}</AvatarName>
+        <SignOut onClick={onLogout}>
           <i className="fas fa-sign-out-alt"></i>
         </SignOut>
       </>
     );
+  };
+
+  const onLogout = () => {
+    setLogined(false);
   };
 
   return (
