@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import {
   PopupContainer,
   PopupForm,
@@ -12,6 +12,7 @@ import {
   LoginSection,
   InputSection,
   InputLabel,
+  InputError,
   FormInput,
   BtnLogin,
 } from "./styles";
@@ -23,14 +24,15 @@ import {
 } from "reactjs-social-login";
 
 const SignInSection = () => {
-  const { setLogined, setUser } = useContext(LoginContext);
+  const { setLogined, setUser, user } = useContext(LoginContext);
 
   const onReceive = (data) => {
-    //TODO: зберігати accesToken аби при перезагрузці не викидало з профілю
     setUser({
       name: data.short_name || data.given_name || data.login,
       image: data.avatar_url || data.picture?.data?.url,
+      token: data.access_token || data.accessToken,
     });
+    localStorage.setItem("token", user.token);
     setLogined(true);
   };
 
@@ -51,10 +53,9 @@ const SignInSection = () => {
                 onReject={(err) => {
                   console.log(err);
                 }}
-              >
-                <i className="fab fa-google" />
-                Sign in by Google
-              </LoginSocialGoogle>
+              />
+              <i className="fab fa-google" />
+              Continue by Google
             </GoogleButton>
             <FacebookButton>
               <LoginSocialFacebook
@@ -68,10 +69,9 @@ const SignInSection = () => {
                 onReject={(err) => {
                   console.log(err);
                 }}
-              >
-                <i className="fab fa-facebook-f" />
-                Sign in by Facebook
-              </LoginSocialFacebook>
+              />
+              <i className="fab fa-facebook-f" />
+              Continue by Facebook
             </FacebookButton>
             <GithubButton>
               <LoginSocialGithub
@@ -85,10 +85,9 @@ const SignInSection = () => {
                 onReject={(err) => {
                   console.log(err);
                 }}
-              >
-                <i className="fab fa-github" />
-                Sign in by GitHub
-              </LoginSocialGithub>
+              />
+              <i className="fab fa-github" />
+              Continue by Github
             </GithubButton>
           </FormSocial>
           <Separator />

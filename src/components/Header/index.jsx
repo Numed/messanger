@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useMemo } from "react";
 import { useHttp } from "../../hooks/https.hook";
 import {
   Input,
@@ -26,11 +26,8 @@ const Header = () => {
     // eslint-disable-next-line
   }, [searchValue]);
 
-  //GOOGLe picture and given_name
-  //Facebook short_name picture.data.url
-  //Github login and avatar_url
-
   const LoginContent = () => {
+    //TODO: Запоминати user і мб ставити у localStorage
     return (
       <>
         <Avatar bg={user.image}>

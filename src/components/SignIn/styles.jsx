@@ -88,7 +88,7 @@ export const GoogleButton = styled.button`
   transform: scale(1.1);
 
   &:not(:first-child) {
-    margin-top: 20px;
+    margin-top: 25px;
   }
 
   &:hover {
@@ -153,7 +153,7 @@ export const LoginSection = styled.div`
 export const InputSection = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px 0;
+  margin: 15px 0;
 `;
 
 export const InputLabel = styled.label`
@@ -168,14 +168,15 @@ export const InputError = styled.span`
   font-size: 12px;
   color: #e63946;
   letter-spacing: 1.1px;
+  margin-bottom: 10px;
 `;
 
 export const FormInput = styled.input`
   width: 100%;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   padding: 2px 35px 2px 0;
-  color: #373b3e;
+  color: #fff;
   letter-spacing: -0.05px;
   outline: none;
   border: none;

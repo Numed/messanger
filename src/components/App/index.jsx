@@ -5,6 +5,7 @@ import { LoginContext } from "../Context";
 import { onDarkMode } from "../../helpers";
 import { Moon } from "../SideMenu/style";
 import SignInSection from "../SignIn";
+import { StarField } from "starfield-react";
 
 const App = () => {
   const [logined, setLogined] = useState(false);
@@ -17,8 +18,6 @@ const App = () => {
     // eslint-disable-next-line
   }, [darkMode]);
 
-  //TODO: Придумати що поставити на бекграунд в головному меню +
-  //зробити авторизацію для користувачів OAuth24
   return (
     <>
       <LoginContext.Provider value={{ logined, setLogined, user, setUser }}>
@@ -31,6 +30,24 @@ const App = () => {
         onClick={() =>
           darkMode === "light" ? setDarkMode("dark") : setDarkMode("light")
         }
+      />
+      <StarField
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "90%",
+          zIndex: "-1",
+          top: "10%",
+        }}
+        speed={3}
+        count={200}
+        fps={60}
+        width={window.innerWidth}
+        noBackground
+        starStyle={darkMode === "dark" ? "#fff" : "#000"}
+        starSize={1}
+        starShape="butt"
+        starRatio={356}
       />
     </>
   );

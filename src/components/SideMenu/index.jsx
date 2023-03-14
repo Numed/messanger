@@ -13,6 +13,7 @@ import { sortChats } from "../../helpers";
 import ChatListSection from "../ChatList";
 
 const SideMenu = () => {
+  //TODO: Переписати щоб не було використання localSrotage
   const [info, setInfo] = useState(
     localStorage.getItem("history-chat-list")
       ? JSON.parse(localStorage.getItem("history-chat-list"))

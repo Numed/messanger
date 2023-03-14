@@ -14,7 +14,7 @@ body {
 }
 
 body.dark-mode {
-  background: #27292d;
+  background: #111517;
 }
 
 body.dark-mode .avatar-name,
@@ -32,7 +32,7 @@ body.dark-mode .wait-message {
 
 body.dark-mode .input-search {
   color: #5e6064;
-  background: #27292d;
+  background: #111517;
 }
 
 body.dark-mode .input-message,
@@ -54,7 +54,7 @@ body.dark-mode .fa-sign-out-alt
 }
 
 body.dark-mode .chat-inner::-webkit-scrollbar-track {
-  background-color: #27292d;
+  background-color: #111517;
 }
 
 .Toastify__toast-theme--dark {
