@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useMemo } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useHttp } from "../../hooks/https.hook";
 import {
   Input,
@@ -19,7 +19,7 @@ const Header = () => {
   const { useDebounce } = useHttp();
   const [searchValue, setSearchValue] = useState("");
   const searchTerm = useDebounce(searchValue.trim().toLowerCase(), 300);
-  const { logined, setLogined, user } = useContext(LoginContext);
+  const { logined, setLogined, user, setUser } = useContext(LoginContext);
 
   useEffect(() => {
     findUser(searchTerm);
@@ -43,6 +43,8 @@ const Header = () => {
 
   const onLogout = () => {
     setLogined(false);
+    setUser(null);
+    localStorage.removeItem("token");
   };
 
   return (
