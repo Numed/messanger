@@ -212,8 +212,8 @@ export const WaitSection = styled.div`
 `;
 
 export const WaitMessage = styled.span`
-  border-radius: 20px;
   position: absolute;
+  border-radius: 5px;
   background: #ccc;
   top: 50%;
   left: 50%;

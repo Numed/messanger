@@ -1,59 +1,4 @@
-import { toast } from "react-toastify";
-import ToastifyMessage from "../components/ToastifyMessage";
-import "react-toastify/dist/ReactToastify.css";
-
-export const getMonth = () => {
-  const month = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const date = new window.Date();
-  const nameMonth = month[date.getMonth()];
-  return nameMonth;
-};
-
-export const getFullDate = () => {
-  const date = new window.Date().toLocaleString(),
-    day = date.slice(0, 2),
-    month = date.slice(3, 5),
-    year = date.slice(8, 10),
-    fullYear = date.slice(6, 10),
-    time = date.slice(12, 17),
-    nameMonth = getMonth(),
-    dateSide = `${nameMonth} ${day}, ${fullYear}`,
-    dateNow = `${month}/${day}/${year}, ${time}`;
-
-  return { dateSide, dateNow };
-};
-
-export const notify = (message, avatar, name, selectedUser) => {
-  const sideMenu = document.querySelector(".clicked");
-  if (sideMenu && selectedUser.name === name) {
-    return toast(
-      <ToastifyMessage message={message} avatar={avatar} name={name} />,
-      {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: localStorage.getItem("dark-mode"),
-      }
-    );
-  }
-};
+//TODO: Посортувати по файликам
 
 export const sortChats = (messages, info) => {
   if (messages[messages.length - 1]) {
@@ -92,24 +37,6 @@ export const displayCounter = (e, action) => {
   }
 };
 
-export const onDarkMode = (moon, darkMode) => {
-  if (!localStorage.getItem("dark-mode")) {
-    moon.current.classList.add("active");
-    document.body.classList.add("dark-mode");
-    localStorage.setItem("dark-mode", "dark");
-  } else {
-    if (darkMode === "dark") {
-      moon.current.classList.add("active");
-      document.body.classList.add("dark-mode");
-      localStorage.setItem("dark-mode", "dark");
-    } else {
-      moon.current.classList.remove("active");
-      localStorage.setItem("dark-mode", "light");
-      document.body.classList.remove("dark-mode");
-    }
-  }
-};
-
 export const findUser = (searchTerm) => {
   const usersName = document.querySelectorAll(".avatar-name");
   let searchData = searchTerm;
@@ -126,4 +53,18 @@ export const findUser = (searchTerm) => {
       e.parentElement.parentElement.parentElement.classList.remove("hide");
     });
   }
+};
+
+export const checkGoogle = (token) => {
+  fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`)
+}
+
+export const checkGithub = (token) => {
+  fetch(`https://github.com/login/oauth/access_token=${token}`);
+};
+
+export const checkFacebook = (token) => {
+  fetch(
+    `https://www.facebook.com/connect/login_success.html#access_token=${token}`
+  );
 };

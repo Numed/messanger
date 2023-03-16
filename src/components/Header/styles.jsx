@@ -99,6 +99,8 @@ export const AvatarContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: #333;
+  position: relative;
 `;
 
 export const Avatar = styled.div`
@@ -126,15 +128,32 @@ export const SignInMessage = styled.h3`
   color: #303236;
 `;
 
-export const SignIn = styled.button`
-  cursor: pointer;
-  background: none;
-  display: flex;
-  align-items: center;
-  border: none;
-  i {
-    padding-left: 10px;
-    transform: scale(1.2);
+export const DropdownContainer = styled.div`
+  &:hover .drop-down__menu {
+    display: flex;
+  }
+`;
+
+export const DropdownMenu = styled.div`
+  display: none;
+  top: 100%;
+  left: 0;
+  position: absolute;
+  background-color: #333;
+  min-width: 100%;
+  z-index: 1;
+  height: auto;
+  flex-direction: column;
+  padding: 10px;
+`;
+
+export const DropdownLink = styled.div`
+  &:hover {
+    color: #2f8dee;
+  }
+
+  &:not(:first-child) {
+    margin-top: 5px;
   }
 `;
 
@@ -144,10 +163,22 @@ export const SignOut = styled.button`
   display: flex;
   align-items: center;
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 100%;
+  height: 24px;
+  color: #fff;
+  font-size: 13px;
+  justify-content: flex-end;
+`;
 
-  i {
-    transform: scale(1.2);
-  }
+export const UpdateButton = styled.button`
+  cursor: pointer;
+  background: none;
+  display: flex;
+  align-items: center;
+  border: none;
+  width: 100%;
+  height: 24px;
+  color: #fff;
+  font-size: 13px;
+  justify-content: flex-end;
 `;

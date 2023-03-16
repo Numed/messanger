@@ -1,15 +1,16 @@
 import { useState, useRef, useEffect } from "react";
+import { StarField } from "starfield-react";
+
 import Header from "../Header";
 import SideMenu from "../SideMenu";
 import { LoginContext } from "../Context";
-import { onDarkMode } from "../../helpers";
+import { onDarkMode } from "../../helpers/theme";
 import { Moon } from "../SideMenu/style";
 import SignInSection from "../SignIn";
-import { StarField } from "starfield-react";
 
 const App = () => {
   const [logined, setLogined] = useState(false);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [darkMode, setDarkMode] = useState(localStorage.getItem("dark-mode"));
   const moonRef = useRef();
 

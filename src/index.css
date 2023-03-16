@@ -48,6 +48,7 @@ body.dark-mode .chat-inner::-webkit-scrollbar-thumb {
 body.dark-mode .fa-long-arrow-alt-left, 
 body.dark-mode .fa-sign-in-alt, 
 body.dark-mode .fa-times, 
+body.dark-mode .fa-caret-down, 
 body.dark-mode .fa-sign-out-alt
 {
   color: #faf8fc;

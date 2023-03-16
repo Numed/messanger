@@ -13,7 +13,8 @@ import {
   BtnBack,
   InputInner,
 } from "./style";
-import { getFullDate, notify } from "../../helpers";
+import { getFullDate } from "../../helpers/data";
+import { notify } from "../../helpers/notifications";
 import { CreateInterlocutorMessage, CreateMyMessage } from "../../services";
 import { useHttp } from "../../hooks/https.hook";
 import Layout from "../LayoutChat";

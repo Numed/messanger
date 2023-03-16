@@ -11,6 +11,10 @@ import {
   AvatarName,
   AvatarContainer,
   SignOut,
+  DropdownContainer,
+  DropdownMenu,
+  DropdownLink,
+  UpdateButton,
 } from "./styles";
 import { findUser } from "../../helpers";
 import { LoginContext } from "../Context";
@@ -26,25 +30,32 @@ const Header = () => {
     // eslint-disable-next-line
   }, [searchValue]);
 
+  const onLogout = () => {
+    setLogined(false);
+    setUser(null);
+    localStorage.removeItem("token");
+  };
+
   const LoginContent = () => {
-    //TODO: Запоминати user і мб ставити у localStorage
     return (
       <>
         <Avatar bg={user.image}>
           <CircleActive />
         </Avatar>
         <AvatarName className="welcome-message">Hello, {user.name}</AvatarName>
-        <SignOut onClick={onLogout}>
-          <i className="fas fa-sign-out-alt"></i>
-        </SignOut>
+        <DropdownContainer>
+          <i className="fa fa-caret-down" />
+          <DropdownMenu className="drop-down__menu">
+            <DropdownLink>
+              <UpdateButton>Update</UpdateButton>
+            </DropdownLink>
+            <DropdownLink>
+              <SignOut onClick={onLogout}>Sign out</SignOut>
+            </DropdownLink>
+          </DropdownMenu>
+        </DropdownContainer>
       </>
     );
-  };
-
-  const onLogout = () => {
-    setLogined(false);
-    setUser(null);
-    localStorage.removeItem("token");
   };
 
   return (

@@ -1,11 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { LoginSocialGithub, LoginSocialFacebook } from "reactjs-social-login";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+import { Formik, Form } from "formik";
+
 import {
   PopupContainer,
   PopupForm,
   FormInner,
   FormTitle,
   FormSocial,
-  GoogleButton,
   FacebookButton,
   GithubButton,
   Separator,
@@ -17,90 +21,89 @@ import {
   BtnLogin,
 } from "./styles";
 import { LoginContext } from "../Context";
-import { LoginSocialGithub, LoginSocialFacebook } from "reactjs-social-login";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
+import { SignupSchema } from "./validateForm";
 
 const SignInSection = () => {
-  const { setLogined, setUser, user } = useContext(LoginContext);
+  const [loading, setLoading] = useState(false);
+  const { setLogined, setUser } = useContext(LoginContext);
 
   const onReceive = (data) => {
-    console.log(data);
-    setUser({
-      name: data.short_name || data.given_name || data.login,
-      image: data.avatar_url || data.picture?.data?.url,
-      token: data.access_token || data.accessToken,
-    });
-    localStorage.setItem("token", data.access_token || data.accessToken);
-    if (data.access_token || data.accessToken) {
-      setLogined(true);
+    setLoading(false);
+    if (data.credential) {
+      const userDate = jwt_decode(data.credential);
+      setUser({
+        name: userDate.given_name,
+        image: userDate.picture,
+        token: userDate.access_token,
+      });
+      localStorage.setItem("token", data.credential);
+      data.credential !== undefined ? setLogined(true) : setLogined(false);
     } else {
-      setLogined(false);
+      setUser({
+        name: data.short_name || data.login,
+        image: data.avatar_url || data.picture.data.url,
+        token: data.access_token || data.accessToken,
+      });
+      localStorage.setItem("token", data.access_token || data.accessToken);
+      data.access_token || data.accessToken
+        ? setLogined(true)
+        : setLogined(false);
     }
   };
 
-  const checkGithub = (token) => {
-    fetch(`https://github.com/login/oauth/access_token=${token}`);
+  const onError = (err) => {
+    console.log(err);
   };
 
-  const checkFacebook = (token) => {
-    fetch(
-      `https://www.facebook.com/connect/login_success.html#access_token=${token}`
-    );
+  const onSubmit = (values) => {
+    console.log(values);
   };
 
-  //TODO: Провалідувати поля через yup
   return (
     <PopupContainer>
       <PopupForm>
         <FormInner>
           <FormSocial>
-            <GoogleOAuthProvider clientId="933074360386-tfgqsfrpj6ukjuarh189ji1q9i6pohhl.apps.googleusercontent.com">
-              <GoogleButton>
-                <GoogleLogin
-                  onSuccess={(credentialResponse) => {
-                    console.log(credentialResponse);
-                  }}
-                  shape="pill"
-                  text="continue_with"
-                  theme="filled_black"
-                  onError={() => {
-                    console.log("Login Failed");
-                  }}
-                >
-                  <i className="fab fa-google" />
-                  Continue by Google
-                </GoogleLogin>
-              </GoogleButton>
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_ID}>
+              <GoogleLogin
+                onSuccess={(data) => {
+                  onReceive(data);
+                }}
+                onError={onError}
+                style={{ width: "90%" }}
+                logo_alignment="left"
+                text="continue_with"
+                theme="filled_black"
+                shape="rectangular"
+                disabled={loading}
+                cancel_on_tap_outside
+              >
+                <i className="fab fa-google" />
+                Continue by Google
+              </GoogleLogin>
             </GoogleOAuthProvider>
-            <FacebookButton>
+            <FacebookButton disabled={loading}>
               <LoginSocialFacebook
-                fieldsProfile={
-                  "id,first_name,last_name,middle_name,name,name_format,picture,short_name,email,gender"
-                }
-                appId={"5995581290562724"}
+                appId={process.env.REACT_APP_FACEBOOK_ID}
+                fieldsProfile="picture,short_name,"
                 onResolve={({ data }) => {
                   onReceive(data);
                 }}
-                onReject={(err) => {
-                  console.log(err);
-                }}
+                onReject={onError}
               >
                 <i className="fab fa-facebook-f" />
                 Continue by Facebook
               </LoginSocialFacebook>
             </FacebookButton>
-            <GithubButton>
+            <GithubButton disabled={loading}>
               <LoginSocialGithub
-                client_id={"5c66c57740f22128c145"}
-                client_secret={"65055e75f157d9245ec6422c398bb5c8a80f80a9"}
+                client_id={process.env.REACT_APP_GITHUB_ID}
+                client_secret={process.env.REACT_APP_GITHUB_SECRET}
                 redirect_uri={window.location.href}
                 onResolve={({ data }) => {
                   onReceive(data);
                 }}
-                onReject={(err) => {
-                  console.log(err);
-                }}
+                onReject={onError}
               >
                 <i className="fab fa-github" />
                 Continue by Github
@@ -110,15 +113,36 @@ const SignInSection = () => {
           <Separator />
           <LoginSection>
             <FormTitle>Sign in by email</FormTitle>
-            <InputSection>
-              <InputLabel>Email</InputLabel>
-              <FormInput type="text" required />
-            </InputSection>
-            <InputSection>
-              <InputLabel>Password</InputLabel>
-              <FormInput type="password" required />
-            </InputSection>
-            <BtnLogin>Sign in</BtnLogin>
+            <Formik
+              initialValues={{
+                email: "",
+                password: "",
+              }}
+              validationSchema={SignupSchema}
+              onSubmit={(values) => {
+                onSubmit(values);
+              }}
+            >
+              {({ errors, touched }) => (
+                <Form>
+                  <InputSection>
+                    <InputLabel>Email</InputLabel>
+                    {errors.email && touched.email ? (
+                      <InputError>{errors.email}</InputError>
+                    ) : null}
+                    <FormInput type="email" name="email" required />
+                  </InputSection>
+                  <InputSection>
+                    <InputLabel>Password</InputLabel>
+                    {errors.password && touched.password ? (
+                      <InputError>{errors.password}</InputError>
+                    ) : null}
+                    <FormInput type="password" name="password" required />
+                  </InputSection>
+                  <BtnLogin type="submit">Sign in</BtnLogin>
+                </Form>
+              )}
+            </Formik>
           </LoginSection>
         </FormInner>
       </PopupForm>

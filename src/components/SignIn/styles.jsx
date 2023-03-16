@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import bg from "../../img/SignIn/bg.svg";
+import { Field } from "formik";
 
 export const PopupContainer = styled.div`
   display: flex;
@@ -75,15 +76,16 @@ export const FormSocial = styled.div`
   }
 `;
 
-export const GoogleButton = styled.button`
-  width: 90%;
-  background-color: #db4437;
+export const FacebookButton = styled.button`
+  width: 70%;
+  background-color: #4267b2;
   border: none;
   color: #fff;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
+  border-radius: 5px;
   letter-spacing: 1.1px;
-  padding: 6px 20px;
+  padding: 8px 20px;
   cursor: pointer;
   transform: scale(1.1);
 
@@ -113,11 +115,7 @@ export const GoogleButton = styled.button`
   }
 `;
 
-export const FacebookButton = styled(GoogleButton)`
-  background-color: #4267b2;
-`;
-
-export const GithubButton = styled(GoogleButton)`
+export const GithubButton = styled(FacebookButton)`
   background-color: #171515;
 `;
 
@@ -171,7 +169,7 @@ export const InputError = styled.span`
   margin-bottom: 10px;
 `;
 
-export const FormInput = styled.input`
+export const FormInput = styled(Field)`
   width: 100%;
   font-size: 15px;
   font-weight: 400;
@@ -194,6 +192,7 @@ export const BtnLogin = styled.button`
   padding: 4px 30px;
   margin-top: 15px;
   letter-spacing: 1.1px;
+  border-radius: 5px;
   background-color: #373b3e;
   color: #fff;
   font-size: 14px;
