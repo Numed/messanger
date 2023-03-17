@@ -88,7 +88,7 @@ export const CircleActive = styled.span`
   top: 65%;
   left: 65%;
   border-radius: 8px;
-  z-index: 2;
+  z-index: 5;
 
   @media (max-width: 400px) {
     left: 60%;
@@ -99,8 +99,11 @@ export const AvatarContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #333;
   position: relative;
+
+  &:hover .drop-down__menu {
+    display: flex;
+  }
 `;
 
 export const Avatar = styled.div`
@@ -118,8 +121,12 @@ export const Avatar = styled.div`
 export const AvatarName = styled.h3`
   font-size: 14px;
   letter-spacing: 1.1px;
-  color: #303236;
-  padding: 0 15px;
+  color: #faf8fc;
+  float: left;
+
+  span {
+    color: #fff;
+  }
 `;
 
 export const SignInMessage = styled.h3`
@@ -129,6 +136,8 @@ export const SignInMessage = styled.h3`
 `;
 
 export const DropdownContainer = styled.div`
+  margin-left: 15px;
+
   &:hover .drop-down__menu {
     display: flex;
   }
@@ -140,7 +149,7 @@ export const DropdownMenu = styled.div`
   left: 0;
   position: absolute;
   background-color: #333;
-  min-width: 100%;
+  min-width: 200px;
   z-index: 1;
   height: auto;
   flex-direction: column;
@@ -148,12 +157,16 @@ export const DropdownMenu = styled.div`
 `;
 
 export const DropdownLink = styled.div`
-  &:hover {
-    color: #2f8dee;
+  width: 100%;
+  height: 100%;
+
+  &:first-child {
+    border-bottom: 1px solid #fff;
+    padding: 5px;
   }
 
   &:not(:first-child) {
-    margin-top: 5px;
+    margin-top: 15px;
   }
 `;
 
@@ -165,20 +178,15 @@ export const SignOut = styled.button`
   border: none;
   width: 100%;
   height: 24px;
-  color: #fff;
-  font-size: 13px;
-  justify-content: flex-end;
+  color: #9196a3;
+  font-size: 14px;
+  justify-content: flex-start;
+  padding-left: 5px;
+
+  &:hover {
+    color: #2f8dee;
+    transition: all 0.2s ease-in;
+  }
 `;
 
-export const UpdateButton = styled.button`
-  cursor: pointer;
-  background: none;
-  display: flex;
-  align-items: center;
-  border: none;
-  width: 100%;
-  height: 24px;
-  color: #fff;
-  font-size: 13px;
-  justify-content: flex-end;
-`;
+export const UpdateButton = styled(SignOut)``;

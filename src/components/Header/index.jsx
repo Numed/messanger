@@ -38,14 +38,18 @@ const Header = () => {
 
   const LoginContent = () => {
     return (
-      <>
+      <AvatarContainer>
         <Avatar bg={user.image}>
           <CircleActive />
         </Avatar>
-        <AvatarName className="welcome-message">Hello, {user.name}</AvatarName>
         <DropdownContainer>
           <i className="fa fa-caret-down" />
           <DropdownMenu className="drop-down__menu">
+            <DropdownLink>
+              <AvatarName className="welcome-message">
+                Signed by <span>{user.name}</span>
+              </AvatarName>
+            </DropdownLink>
             <DropdownLink>
               <UpdateButton>Update</UpdateButton>
             </DropdownLink>
@@ -54,7 +58,7 @@ const Header = () => {
             </DropdownLink>
           </DropdownMenu>
         </DropdownContainer>
-      </>
+      </AvatarContainer>
     );
   };
 
@@ -71,7 +75,7 @@ const Header = () => {
             onInput={(e) => setSearchValue(e.target.value)}
           />
         </InputSearch>
-        <AvatarContainer>{logined ? LoginContent() : null}</AvatarContainer>
+        {logined ? LoginContent() : <div />}
       </HeaderInner>
     </HeaderContainer>
   );
