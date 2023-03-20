@@ -6,13 +6,23 @@ import SideMenu from "../SideMenu";
 import { LoginContext } from "../Context";
 import { onDarkMode } from "../../helpers/theme";
 import { Moon } from "../SideMenu/style";
-import SignInSection from "../SignIn";
+import SignInSection from "../SignForms";
 
 const App = () => {
   const [logined, setLogined] = useState(false);
   const [user, setUser] = useState(null);
   const [darkMode, setDarkMode] = useState(localStorage.getItem("dark-mode"));
   const moonRef = useRef();
+
+  /* TODO: 
+            - Зробити форму реєстрації + валідація;
+            - Додати можливість змінювати фотку (react-avatar-edit);
+            - Зробити вікно для Updgrade імені;
+            - Створити БД + бекенд;
+            - Винести більшість локал стореджі на сторону бека;
+            - Перевірка на те, чи користувач має токен + подумати над захистом (в закладках вкладка, залежить від беку);
+            - Приєднання по сокетам;
+    */
 
   useEffect(() => {
     onDarkMode(moonRef, darkMode);

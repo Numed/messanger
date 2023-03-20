@@ -28,7 +28,7 @@ const Layout = () => {
               aut culpa, autem quod libero.
             </MessageText>
           </InterlocutorMessage>
-          <Date className="message-date">08/15/22, 15:30</Date>
+          <Date className="message-date">08/15/23, 15:30</Date>
         </MessageContainer>
       </InterlocutorContainer>
       <MyContainer>
@@ -39,7 +39,7 @@ const Layout = () => {
               iusto facilis accusantium.
             </MyMessageText>
           </MyMessage>
-          <Date className="message-date">08/15/22, 15:38</Date>
+          <Date className="message-date">08/15/23, 15:38</Date>
         </MessageContainer>
       </MyContainer>
       <InterlocutorContainer>
@@ -48,7 +48,7 @@ const Layout = () => {
           <InterlocutorMessage className="message-text">
             <MessageText>{message}</MessageText>
           </InterlocutorMessage>
-          <Date className="message-date">08/15/22, 15:40</Date>
+          <Date className="message-date">08/15/23, 15:40</Date>
         </MessageContainer>
       </InterlocutorContainer>
     </>

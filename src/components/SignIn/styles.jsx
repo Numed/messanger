@@ -1,36 +1,5 @@
 import styled from "styled-components";
-import bg from "../../img/SignIn/bg.svg";
 import { Field } from "formik";
-
-export const PopupContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
-`;
-
-export const PopupForm = styled.div`
-  background-image: url(${bg});
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-  height: 70%;
-  position: relative;
-  z-index: 101;
-
-  @media (max-width: 1024px) {
-    width: 90%;
-  }
-
-  @media (max-width: 426px) {
-    height: 90%;
-  }
-
-  @media (max-width: 380px) {
-    width: 95%;
-  }
-`;
 
 export const FormInner = styled.div`
   width: 100%;
@@ -67,8 +36,16 @@ export const FormSocial = styled.div`
   align-items: center;
   justify-content: center;
 
+  & .btn_class {
+    width: 90% !important;
+  }
+
+  @media (max-width: 788px) {
+    width: 45%;
+  }
+
   @media (max-width: 426px) {
-    width: 50%;
+    width: 55%;
   }
 
   @media (max-width: 325px) {
@@ -155,7 +132,7 @@ export const InputSection = styled.div`
 `;
 
 export const InputLabel = styled.label`
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   color: #fff;
   @media (max-width: 426px) {
     font-size: 13px;
@@ -166,7 +143,6 @@ export const InputError = styled.span`
   font-size: 12px;
   color: #e63946;
   letter-spacing: 1.1px;
-  margin-bottom: 10px;
 `;
 
 export const FormInput = styled(Field)`

@@ -47,7 +47,7 @@ const Header = () => {
           <DropdownMenu className="drop-down__menu">
             <DropdownLink>
               <AvatarName className="welcome-message">
-                Signed by <span>{user.name}</span>
+                Signed in as <span>{user.name}</span>
               </AvatarName>
             </DropdownLink>
             <DropdownLink>

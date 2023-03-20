@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import avatar from "../../img/avatar.jpg";
+import avatar from "../../img/avatar.png";
 
 export const HeaderContainer = styled.header`
   width: 100%;
@@ -149,7 +149,7 @@ export const DropdownMenu = styled.div`
   left: 0;
   position: absolute;
   background-color: #333;
-  min-width: 200px;
+  min-width: 220px;
   z-index: 1;
   height: auto;
   flex-direction: column;
