@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FaMoon } from "react-icons/fa";
 
 export const Container = styled.div`
   margin-top: 20px;
@@ -57,7 +58,6 @@ export const Chat = styled.div`
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 1px 4px 4px rgba(0, 0, 0, 0.25);
     transition: all 0.25s ease-in-out;
   }
 
@@ -172,12 +172,13 @@ export const ChatDate = styled.span`
   }
 `;
 
-export const Moon = styled.i`
+export const Moon = styled(FaMoon)`
   position: absolute;
   bottom: 40px;
   left: 40px;
   transform: scale(1.5);
   cursor: pointer;
+
   &.active {
     color: #fede00;
     transition: all 0.2s ease-in-out;

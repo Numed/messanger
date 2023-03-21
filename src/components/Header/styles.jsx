@@ -48,7 +48,7 @@ export const InputSearch = styled.div`
   align-items: center;
   justify-content: center;
 
-  i {
+  svg {
     width: 12px;
     height: 12px;
     margin-right: 10px;
@@ -80,24 +80,8 @@ export const Input = styled.input`
   }
 `;
 
-export const CircleActive = styled.span`
-  width: 14px;
-  height: 14px;
-  background: #22cb47;
-  position: absolute;
-  top: 65%;
-  left: 65%;
-  border-radius: 8px;
-  z-index: 5;
-
-  @media (max-width: 400px) {
-    left: 60%;
-  }
-`;
-
 export const AvatarContainer = styled.div`
   display: flex;
-  justify-content: space-around;
   align-items: center;
   position: relative;
 
@@ -136,7 +120,7 @@ export const SignInMessage = styled.h3`
 `;
 
 export const DropdownContainer = styled.div`
-  margin-left: 15px;
+  margin-left: 5px;
 
   &:hover .drop-down__menu {
     display: flex;
@@ -154,6 +138,7 @@ export const DropdownMenu = styled.div`
   height: auto;
   flex-direction: column;
   padding: 10px;
+  border-radius: 5px;
 `;
 
 export const DropdownLink = styled.div`

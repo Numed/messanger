@@ -45,16 +45,16 @@ export const FormSocial = styled.div`
   }
 
   @media (max-width: 426px) {
-    width: 55%;
+    width: 67%;
   }
 
   @media (max-width: 325px) {
-    width: 66.6%;
+    width: 82%;
   }
 `;
 
 export const FacebookButton = styled.button`
-  width: 70%;
+  width: 85%;
   background-color: #4267b2;
   border: none;
   color: #fff;
@@ -75,7 +75,7 @@ export const FacebookButton = styled.button`
     transition: all 0.2s ease-in-out;
   }
 
-  & i {
+  & svg {
     margin-right: 10px;
     pointer-events: none;
   }
@@ -87,7 +87,7 @@ export const FacebookButton = styled.button`
 
   @media (max-width: 426px) {
     width: 100%;
-    font-size: 13px;
+    font-size: 12px;
     padding: 6px 15px;
   }
 `;

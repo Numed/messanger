@@ -18,6 +18,7 @@ import {
 } from "./styles";
 import { SigninSchema } from "../SignForms/validateForms";
 import { useSignIn } from "./useSignIn";
+import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 
 const SignIn = () => {
   const { loading, onReceive } = useSignIn();
@@ -41,15 +42,15 @@ const SignIn = () => {
                 onReceive(data);
               }}
               onError={onError}
-              style={{ width: "90%" }}
+              width={280}
               logo_alignment="left"
               text="continue_with"
               theme="filled_black"
               shape="rectangular"
               disabled={loading}
-              cancel_on_tap_outside
+              cancel_on_tap_outsides
             >
-              <i className="fab fa-google" />
+              <FaGoogle className="fab fa-google" />
               Continue by Google
             </GoogleLogin>
           </GoogleOAuthProvider>
@@ -62,7 +63,7 @@ const SignIn = () => {
               }}
               onReject={onError}
             >
-              <i className="fab fa-facebook-f" />
+              <FaFacebook className="fab fa-facebook-f" />
               Continue by Facebook
             </LoginSocialFacebook>
           </FacebookButton>
@@ -76,7 +77,7 @@ const SignIn = () => {
               }}
               onReject={onError}
             >
-              <i className="fab fa-github" />
+              <FaGithub className="fab fa-github" />
               Continue by Github
             </LoginSocialGithub>
           </GithubButton>

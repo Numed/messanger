@@ -17,11 +17,14 @@ import {
   UpdateButton,
 } from "./styles";
 import { findUser } from "../../helpers";
-import { LoginContext } from "../Context";
+import { LoginContext, PopupContext } from "../Context";
+import UpdrageSection from "../UpdrageSection";
+import { FaSearch, FaCaretDown } from "react-icons/fa";
 
 const Header = () => {
   const { useDebounce } = useHttp();
   const [searchValue, setSearchValue] = useState("");
+  const [isOpenPopup, setOpenPopup] = useState(false);
   const searchTerm = useDebounce(searchValue.trim().toLowerCase(), 300);
   const { logined, setLogined, user, setUser } = useContext(LoginContext);
 
@@ -39,11 +42,9 @@ const Header = () => {
   const LoginContent = () => {
     return (
       <AvatarContainer>
-        <Avatar bg={user.image}>
-          <CircleActive />
-        </Avatar>
+        <Avatar bg={user.image} />
         <DropdownContainer>
-          <i className="fa fa-caret-down" />
+          <FaCaretDown className="fa fa-caret-down" />
           <DropdownMenu className="drop-down__menu">
             <DropdownLink>
               <AvatarName className="welcome-message">
@@ -51,7 +52,9 @@ const Header = () => {
               </AvatarName>
             </DropdownLink>
             <DropdownLink>
-              <UpdateButton>Update</UpdateButton>
+              <UpdateButton onClick={() => setOpenPopup(true)}>
+                Update
+              </UpdateButton>
             </DropdownLink>
             <DropdownLink>
               <SignOut onClick={onLogout}>Sign out</SignOut>
@@ -67,7 +70,7 @@ const Header = () => {
       <HeaderInner>
         <Logo>M</Logo>
         <InputSearch>
-          <i className="fas fa-search" />
+          <FaSearch className="fas fa-search" />
           <Input
             className="input-search"
             placeholder="Search.."
@@ -76,6 +79,11 @@ const Header = () => {
           />
         </InputSearch>
         {logined ? LoginContent() : <div />}
+        {isOpenPopup ? (
+          <PopupContext.Provider value={{ setOpenPopup }}>
+            <UpdrageSection />
+          </PopupContext.Provider>
+        ) : null}
       </HeaderInner>
     </HeaderContainer>
   );

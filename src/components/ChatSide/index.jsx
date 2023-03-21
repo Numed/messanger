@@ -1,4 +1,8 @@
 import { useState, useContext, useEffect, useRef } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FaPaperPlane } from "react-icons/fa";
+
 import { AvatarName } from "../SideMenu/style";
 import { InfoContext } from "../Context";
 import {
@@ -19,8 +23,6 @@ import { CreateInterlocutorMessage, CreateMyMessage } from "../../services";
 import { useHttp } from "../../hooks/https.hook";
 import Layout from "../LayoutChat";
 import ErrorMessage from "../ErrorMessage";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const ChatSide = () => {
   const [value, setValue] = useState("");
@@ -160,7 +162,7 @@ const ChatSide = () => {
                 className="btn-submit"
                 onClick={(e) => handlerSubmit(e)}
               >
-                <i className="far fa-paper-plane"></i>
+                <FaPaperPlane />
               </BtnSubmit>
             </InputInner>
           </InputSection>
