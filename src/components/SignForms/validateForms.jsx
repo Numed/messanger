@@ -12,5 +12,5 @@ export const SignupSchema = Yup.object().shape({
 });
 
 export const UpdateScheme = Yup.object().shape({
-  name: Yup.string().required("Name is empty")
+  name: Yup.string().min(2, "To short"),
 });

@@ -18,7 +18,7 @@ import {
   InputInner,
 } from "./style";
 import { getFullDate } from "../../helpers/data";
-import { notify } from "../../helpers/notifications";
+import { notifyAvatar } from "../../helpers/notifications";
 import { CreateInterlocutorMessage, CreateMyMessage } from "../../services";
 import { useHttp } from "../../hooks/https.hook";
 import Layout from "../LayoutChat";
@@ -81,7 +81,7 @@ const ChatSide = () => {
           isBot: true,
         },
       ]);
-      notify(info.value, avatar, name, selectedUser);
+      notifyAvatar(info.value, avatar, name, selectedUser);
     }, 10000);
     return count;
   };
