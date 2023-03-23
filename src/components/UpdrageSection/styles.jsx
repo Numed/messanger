@@ -19,6 +19,10 @@ export const UpdateContainer = styled.div`
   width: 60%;
   height: 80%;
   background: #333;
+
+  @media (max-width: 426px) {
+    width: 80%;
+  }
 `;
 
 export const BtnClose = styled.button`

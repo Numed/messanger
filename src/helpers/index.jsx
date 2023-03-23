@@ -9,6 +9,7 @@ export const sortChats = (messages, info) => {
     const index = info.indexOf(activeChat[0]);
     currentChat.splice(index, 1);
     currentChat.unshift(activeChat[0]);
+    //TODO: Забрати локал сторедж
     localStorage.setItem("history-chat-list", JSON.stringify(currentChat));
     return [...info, currentChat].slice(0, 5);
   }
@@ -56,8 +57,8 @@ export const findUser = (searchTerm) => {
 };
 
 export const checkGoogle = (token) => {
-  fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`)
-}
+  fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`);
+};
 
 export const checkGithub = (token) => {
   fetch(`https://github.com/login/oauth/access_token=${token}`);

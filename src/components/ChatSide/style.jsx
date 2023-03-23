@@ -212,7 +212,7 @@ export const BtnBack = styled.i`
     transform: scale(1.7);
     cursor: pointer;
     position: absolute;
-    top: 0px;
+    bottom: 10px;
     left: 20px;
   }
 `;
@@ -232,4 +232,17 @@ export const TotalDivMessage = styled.div`
       padding-left: 15px;
     }
   }
+`;
+
+export const ChatHeader = styled.div`
+  z-index: 1000;
+  width: 100%;
+  height: 10vh;
+  background: rgb(17, 21, 23);
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  align-items: end;
+  position: sticky;
+  top: -10px;
 `;

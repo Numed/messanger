@@ -139,6 +139,18 @@ export const DropdownMenu = styled.div`
   flex-direction: column;
   padding: 10px;
   border-radius: 5px;
+
+  @media (max-width: 778px) {
+    left: -70px;
+  }
+
+  @media (max-width: 436px) {
+    left: -125px;
+  }
+
+  @media (max-width: 386px) {
+    left: -165px;
+  }
 `;
 
 export const DropdownLink = styled.div`

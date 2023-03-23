@@ -16,6 +16,7 @@ import {
   TotalDivMessage,
   BtnBack,
   InputInner,
+  ChatHeader,
 } from "./style";
 import { getFullDate } from "../../helpers/data";
 import { notifyAvatar } from "../../helpers/notifications";
@@ -27,24 +28,23 @@ import ErrorMessage from "../ErrorMessage";
 const ChatSide = () => {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
-  const chatSideRef = useRef();
+  const chatSideRef = useRef(),
+    totalDiv = useRef();
+  let counter = 0;
 
   const { selectedUser, messages, setMessages, setCountMessage } =
     useContext(InfoContext);
   const { name, avatar } = selectedUser;
   const { request } = useHttp();
-
-  let count = 0,
-    dateNow,
-    dateSide;
+  const { dateNow, dateSide } = getFullDate();
 
   useEffect(() => {
     localStorage.setItem("history-messages", JSON.stringify(messages));
+    onScrollToBottom();
   }, [messages]);
 
   const handlerSubmit = async () => {
     if (value !== "") {
-      const { dateNow, dateSide } = getFullDate();
       setMessages([
         ...messages,
         {
@@ -60,6 +60,10 @@ const ChatSide = () => {
     }
   };
 
+  const onScrollToBottom = () => {
+    totalDiv.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const onRequest = () => {
     request("https://api.chucknorris.io/jokes/random")
       .then(onGetJoke)
@@ -68,8 +72,7 @@ const ChatSide = () => {
 
   const onGetJoke = async (info) => {
     setTimeout(() => {
-      count += 1;
-      setCountMessage((old) => [...old, { name, count: count }]);
+      setCountMessage((old) => [...old, { name, count: ++counter }]);
       setMessages((old) => [
         ...old,
         {
@@ -83,7 +86,7 @@ const ChatSide = () => {
       ]);
       notifyAvatar(info.value, avatar, name, selectedUser);
     }, 10000);
-    return count;
+    return counter, console.log(counter);
   };
 
   const onError = () => {
@@ -102,7 +105,7 @@ const ChatSide = () => {
     messages
       .filter((user) => user.name === name)
       .map(({ avatar, name, message, dateNow, isBot }, id) => (
-        <TotalDivMessage key={id}>
+        <TotalDivMessage key={id} ref={totalDiv}>
           {isBot ? (
             <CreateInterlocutorMessage
               key={id}
@@ -134,11 +137,13 @@ const ChatSide = () => {
         {errorMessage}
         <ChatContainerInner>
           <ChatContainer>
-            <BtnBack
-              className="fas fa-long-arrow-alt-left"
-              onClick={switchSection}
-            />
-            <AvatarName className="chat-avatar__name">{name}</AvatarName>
+            <ChatHeader>
+              <BtnBack
+                className="fas fa-long-arrow-alt-left"
+                onClick={switchSection}
+              />
+              <AvatarName className="chat-avatar__name">{name}</AvatarName>
+            </ChatHeader>
             <ChatInner className="chat-inner">
               <Layout />
               {content}
