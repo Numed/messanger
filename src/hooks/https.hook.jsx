@@ -19,7 +19,7 @@ export const useHttp = () => {
       url,
       method = "GET",
       body = null,
-      headers = { "Content-Type": "application/json" }
+      headers = { "Content-Type": "application/json", "accepts":"application/json" }
     ) => {
       try {
         const response = await fetch(url, { method, body, headers });

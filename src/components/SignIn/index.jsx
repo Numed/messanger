@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import { LoginSocialGithub, LoginSocialFacebook } from "reactjs-social-login";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Formik, Form } from "formik";
+import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 
 import {
   FormSocial,
@@ -18,17 +20,33 @@ import {
 } from "./styles";
 import { SigninSchema } from "../SignForms/validateForms";
 import { useSignIn } from "./useSignIn";
-import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
+import { LoginContext } from "../Context";
+import { useHttp } from "../../hooks/https.hook";
 
 const SignIn = () => {
   const { loading, onReceive } = useSignIn();
+  const { setLogined, setUser } = useContext(LoginContext);
+  const { request } = useHttp();
 
   const onError = (err) => {
     console.log(err);
   };
 
   const onSubmit = (values) => {
-    console.log(values);
+    request(
+      "http://localhost:5000/messanger/api/login",
+      "POST",
+      JSON.stringify(values)
+    )
+      .then(onRequest)
+      .catch(onError);
+  };
+
+  const onRequest = (data) => {
+    setUser({
+      name: data.name,
+    });
+    setLogined(true);
   };
 
   return (

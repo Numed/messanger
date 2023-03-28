@@ -16,15 +16,31 @@ import {
   SignUpTitle,
 } from "./styles";
 import { LoginContext } from "../Context";
+import { useHttp } from "../../hooks/https.hook";
 
 const SignUp = () => {
   const { setLogined, setUser } = useContext(LoginContext);
+  const { request } = useHttp();
 
   const onSubmit = (data) => {
+    request(
+      "http://localhost:5000/messanger/api/registration",
+      "POST",
+      JSON.stringify(data)
+    )
+      .then(onRequest)
+      .catch(onError);
+  };
+
+  const onRequest = (data) => {
     setUser({
       name: data.name,
     });
     setLogined(true);
+  };
+
+  const onError = (error) => {
+    console.log(error);
   };
 
   return (
