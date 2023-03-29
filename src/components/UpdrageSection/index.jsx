@@ -23,10 +23,12 @@ import {
   ImageInner,
 } from "./styles";
 import { notifySuccses } from "../../helpers/notifications";
+import { useHttp } from "../../hooks/https.hook";
 
 const UpdrageSection = () => {
   const { setOpenPopup } = useContext(PopupContext);
   const { user, setUser } = useContext(LoginContext);
+  const { request } = useHttp();
 
   const [nameValue, setName] = useState(user.name);
   const [preview, setPreview] = useState(null);
@@ -34,23 +36,28 @@ const UpdrageSection = () => {
   const onSubmit = () => {
     if (preview === null && nameValue === user.name) {
       return setOpenPopup(false);
-    } else if (preview === null) {
-      setUser({
-        ...user,
-        name: nameValue,
-      });
-    } else if (nameValue === user.name) {
-      setUser({
-        ...user,
-        image: preview,
-      });
     } else {
-      setUser({
-        ...user,
+      const data = {
         name: nameValue,
-        image: preview,
-      });
+        image: preview || user.image,
+        email: user.email,
+      };
+      request(
+        `${process.env.REACT_APP_FETCH_TEMPLATE}/update`,
+        "POST",
+        JSON.stringify(data)
+      )
+        .then(onReceive)
+        .catch((e) => console.log(e));
     }
+  };
+
+  const onReceive = (data) => {
+    setUser({
+      ...user,
+      name: data.name,
+      image: data.image,
+    });
     notifySuccses();
     setTimeout(() => {
       setOpenPopup(false);

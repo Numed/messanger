@@ -1,5 +1,3 @@
-//TODO: Посортувати по файликам
-
 export const sortChats = (messages, info) => {
   if (messages[messages.length - 1]) {
     const currentChat = info;

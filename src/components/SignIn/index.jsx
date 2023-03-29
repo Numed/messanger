@@ -34,7 +34,7 @@ const SignIn = () => {
 
   const onSubmit = (values) => {
     request(
-      "http://localhost:5000/messanger/api/login",
+      `${process.env.REACT_APP_FETCH_TEMPLATE}/login`,
       "POST",
       JSON.stringify(values)
     )
@@ -45,7 +45,11 @@ const SignIn = () => {
   const onRequest = (data) => {
     setUser({
       name: data.name,
+      email: data.email,
+      image: data.image,
+      token: data.token,
     });
+    localStorage.setItem("token", data.token);
     setLogined(true);
   };
 
@@ -75,7 +79,7 @@ const SignIn = () => {
           <FacebookButton disabled={loading}>
             <LoginSocialFacebook
               appId={process.env.REACT_APP_FACEBOOK_ID}
-              fieldsProfile="picture,short_name,"
+              fieldsProfile="picture,short_name, email"
               onResolve={({ data }) => {
                 onReceive(data);
               }}

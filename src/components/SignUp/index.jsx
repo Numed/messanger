@@ -24,7 +24,7 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     request(
-      "http://localhost:5000/messanger/api/registration",
+      `${process.env.REACT_APP_FETCH_TEMPLATE}/registration`,
       "POST",
       JSON.stringify(data)
     )
@@ -35,6 +35,8 @@ const SignUp = () => {
   const onRequest = (data) => {
     setUser({
       name: data.name,
+      email: data.email,
+      token: data.token,
     });
     setLogined(true);
   };
