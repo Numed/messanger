@@ -41,7 +41,7 @@ export const ChatContainer = styled.div`
 export const ChatInner = styled.div`
   margin-bottom: 10px;
   width: 100%;
-  height: 500px;
+  height: 475px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -238,7 +238,7 @@ export const ChatHeader = styled.div`
   z-index: 1000;
   width: 100%;
   height: 10vh;
-  background: rgb(17, 21, 23);
+  background: #fff;
   display: flex;
   -webkit-box-pack: center;
   justify-content: center;

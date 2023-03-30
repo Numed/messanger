@@ -17,6 +17,7 @@ import {
 } from "./styles";
 import { LoginContext } from "../Context";
 import { useHttp } from "../../hooks/https.hook";
+import { notifyError } from "../../helpers/notifications";
 
 const SignUp = () => {
   const { setLogined, setUser } = useContext(LoginContext);
@@ -43,6 +44,7 @@ const SignUp = () => {
 
   const onError = (error) => {
     console.log(error);
+    notifyError(error);
   };
 
   return (

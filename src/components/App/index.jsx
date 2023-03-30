@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { StarField } from "starfield-react";
 import jwt_decode from "jwt-decode";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Header from "../Header";
 import SideMenu from "../SideMenu";
@@ -9,6 +11,7 @@ import { onDarkMode } from "../../helpers/theme";
 import { Moon } from "../SideMenu/style";
 import SignInSection from "../SignForms";
 import { useHttp } from "../../hooks/https.hook";
+import { notifyError } from "../../helpers/notifications";
 
 const App = () => {
   const [logined, setLogined] = useState(false);
@@ -37,17 +40,17 @@ const App = () => {
   }, [darkMode]);
 
   const onReceive = (data) => {
-    setLogined(true);
     setUser({
       name: data.name,
       image: data.image,
       token: data.token,
     });
+    setLogined(true);
     localStorage.setItem("token", data.token);
   };
 
   const onError = (e) => {
-    console.log(e);
+    notifyError(e);
   };
 
   return (
@@ -79,6 +82,18 @@ const App = () => {
         starSize={1}
         starShape="butt"
         starRatio={356}
+      />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme={localStorage.getItem("theme")}
       />
     </>
   );

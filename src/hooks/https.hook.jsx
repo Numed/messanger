@@ -19,16 +19,20 @@ export const useHttp = () => {
       url,
       method = "GET",
       body = null,
-      headers = { "Content-Type": "application/json", "accepts":"application/json" }
+      headers = {
+        "Content-Type": "application/json",
+        accepts: "application/json",
+      }
     ) => {
       try {
         const response = await fetch(url, { method, body, headers });
+        const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(`Could not fetch ${url}, status: ${response.status}`);
+          throw (
+            data.message || `Could not fetch ${url}, status: ${response.status}`
+          );
         }
-
-        const data = await response.json();
 
         return data;
       } catch (e) {

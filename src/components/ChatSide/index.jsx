@@ -1,6 +1,4 @@
 import { useState, useContext, useEffect, useRef } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { FaPaperPlane } from "react-icons/fa";
 
 import { AvatarName } from "../SideMenu/style";
@@ -123,21 +121,10 @@ const ChatSide = () => {
   return (
     <>
       <ChatSideContainer ref={chatSideRef} className="chat-side__container">
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
         {errorMessage}
         <ChatContainerInner>
           <ChatContainer>
-            <ChatHeader>
+            <ChatHeader className="chat-header">
               <BtnBack
                 className="fas fa-long-arrow-alt-left"
                 onClick={switchSection}

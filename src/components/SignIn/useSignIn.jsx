@@ -10,7 +10,6 @@ export const useSignIn = () => {
   const { request } = useHttp();
 
   const onReceive = (data) => {
-    console.log("DATA: ", data);
     const dataReceive = data;
     let outputData;
     if (dataReceive.credential === undefined) {

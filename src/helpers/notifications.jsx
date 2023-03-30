@@ -33,3 +33,16 @@ export const notifySuccses = () => {
     theme: localStorage.getItem("dark-mode"),
   });
 };
+
+export const notifyError = (error) => {
+  return toast.error(`${error}`, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: localStorage.getItem("dark-mode"),
+  });
+};

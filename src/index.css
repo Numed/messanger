@@ -30,7 +30,8 @@ body.dark-mode .wait-message {
   background-color: #373b3e;
 }
 
-body.dark-mode .input-search {
+body.dark-mode .input-search,
+body.dark-mode .chat-header {
   color: #5e6064;
   background: #111517;
 }

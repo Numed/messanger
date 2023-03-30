@@ -22,6 +22,7 @@ import { SigninSchema } from "../SignForms/validateForms";
 import { useSignIn } from "./useSignIn";
 import { LoginContext } from "../Context";
 import { useHttp } from "../../hooks/https.hook";
+import { notifyError } from "../../helpers/notifications";
 
 const SignIn = () => {
   const { loading, onReceive } = useSignIn();
@@ -29,7 +30,7 @@ const SignIn = () => {
   const { request } = useHttp();
 
   const onError = (err) => {
-    console.log(err);
+    notifyError(err);
   };
 
   const onSubmit = (values) => {
