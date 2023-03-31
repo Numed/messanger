@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 
 import { useHttp } from "../../hooks/https.hook";
 import { LoginContext } from "../Context";
+import { notifyError } from "../../helpers/notifications";
 
 export const useSignIn = () => {
   const [loading, setLoading] = useState(false);
@@ -51,7 +52,7 @@ export const useSignIn = () => {
   };
 
   const onError = (e) => {
-    console.log(e);
+    notifyError(e);
   };
 
   return { onReceive, loading, setLoading };

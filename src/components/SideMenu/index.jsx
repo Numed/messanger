@@ -29,7 +29,7 @@ const SideMenu = () => {
   const sideMenuRef = useRef();
 
   useEffect(() => {
-    if (messages.length >= 6) {
+    if (messages.length >= 8) {
       setInfo(sortChats(messages, info));
     }
     // eslint-disable-next-line
