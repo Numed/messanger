@@ -14,10 +14,17 @@ import { useHttp } from "../../hooks/https.hook";
 import { notifyError } from "../../helpers/notifications";
 
 const App = () => {
-  const [logined, setLogined] = useState(false);
+  const [logined, setLogined] = useState(
+    localStorage.getItem("logined") || false
+  );
   const [user, setUser] = useState(null);
   const [darkMode, setDarkMode] = useState(localStorage.getItem("dark-mode"));
   const { request } = useHttp();
+
+  useEffect(() => {
+    onDarkMode(darkMode);
+    // eslint-disable-next-line
+  }, [darkMode]);
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) return;
@@ -34,19 +41,15 @@ const App = () => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    onDarkMode(darkMode);
-    // eslint-disable-next-line
-  }, [darkMode]);
-
   const onReceive = (data) => {
     setUser({
       name: data.name,
       image: data.image,
       token: data.token,
     });
-    setLogined(true);
     localStorage.setItem("token", data.token);
+    setLogined(true);
+    localStorage.setItem("logined", true);
   };
 
   const onError = (e) => {

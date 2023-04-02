@@ -52,6 +52,7 @@ const SignIn = () => {
     });
     localStorage.setItem("token", data.token);
     setLogined(true);
+    localStorage.setItem("logined", true);
   };
 
   return (

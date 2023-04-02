@@ -49,6 +49,7 @@ export const useSignIn = () => {
         : null,
     });
     setLogined(true);
+    localStorage.setItem("logined", true);
   };
 
   const onError = (e) => {

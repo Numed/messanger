@@ -39,7 +39,9 @@ const SignUp = () => {
       email: data.email,
       token: data.token,
     });
+    localStorage.setItem("token", data.token);
     setLogined(true);
+    localStorage.setItem("logined", true);
   };
 
   const onError = (error) => {

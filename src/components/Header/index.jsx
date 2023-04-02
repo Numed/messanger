@@ -1,4 +1,6 @@
 import { useEffect, useState, useContext } from "react";
+import { FaSearch, FaCaretDown } from "react-icons/fa";
+
 import { useHttp } from "../../hooks/https.hook";
 import {
   Input,
@@ -6,7 +8,6 @@ import {
   HeaderInner,
   Logo,
   InputSearch,
-  CircleActive,
   Avatar,
   AvatarName,
   AvatarContainer,
@@ -19,7 +20,7 @@ import {
 import { findUser } from "../../helpers";
 import { LoginContext, PopupContext } from "../Context";
 import UpdrageSection from "../UpdrageSection";
-import { FaSearch, FaCaretDown } from "react-icons/fa";
+import avatarTemplate from "../../img/avatar.png";
 
 const Header = () => {
   const { useDebounce } = useHttp();
@@ -37,18 +38,19 @@ const Header = () => {
     setLogined(false);
     setUser(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("logined");
   };
 
   const LoginContent = () => {
     return (
       <AvatarContainer>
-        <Avatar bg={user.image} />
+        <Avatar bg={user !== null ? user.image : avatarTemplate} />
         <DropdownContainer>
           <FaCaretDown className="fa fa-caret-down" />
           <DropdownMenu className="drop-down__menu">
             <DropdownLink>
               <AvatarName className="welcome-message">
-                Signed in as <span>{user.name}</span>
+                Signed in as <span>{user !== null ? user.name : "User"}</span>
               </AvatarName>
             </DropdownLink>
             <DropdownLink>
