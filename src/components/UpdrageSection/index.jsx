@@ -23,12 +23,12 @@ import {
   ImageInner,
 } from "./styles";
 import { notifySuccses } from "../../helpers/notifications";
-import { useHttp } from "../../hooks/https.hook";
+import useRequestService from "../../services/index";
 
 const UpdrageSection = () => {
   const { setOpenPopup } = useContext(PopupContext);
   const { user, setUser } = useContext(LoginContext);
-  const { request } = useHttp();
+  const { updateUser } = useRequestService();
 
   const [nameValue, setName] = useState(user.name);
   const [preview, setPreview] = useState(null);
@@ -42,11 +42,7 @@ const UpdrageSection = () => {
         image: preview || user.image,
         email: user.email,
       };
-      request(
-        `${process.env.REACT_APP_FETCH_TEMPLATE}/update`,
-        "POST",
-        JSON.stringify(data)
-      )
+      updateUser(data)
         .then(onReceive)
         .catch((e) => console.log(e));
     }

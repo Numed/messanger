@@ -18,7 +18,10 @@ import {
 } from "./style";
 import { getFullDate } from "../../helpers/data";
 import { notifyAvatar } from "../../helpers/notifications";
-import { CreateInterlocutorMessage, CreateMyMessage } from "../../services";
+import {
+  CreateInterlocutorMessage,
+  CreateMyMessage,
+} from "../../helpers/messages";
 import { useHttp } from "../../hooks/https.hook";
 import Layout from "../LayoutChat";
 import ErrorMessage from "../ErrorMessage";

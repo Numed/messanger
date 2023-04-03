@@ -21,26 +21,20 @@ import {
 import { SigninSchema } from "../SignForms/validateForms";
 import { useSignIn } from "./useSignIn";
 import { LoginContext } from "../Context";
-import { useHttp } from "../../hooks/https.hook";
+import useRequestService from "../../services/index";
 import { notifyError } from "../../helpers/notifications";
 
 const SignIn = () => {
   const { loading, onReceive } = useSignIn();
   const { setLogined, setUser } = useContext(LoginContext);
-  const { request } = useHttp();
+  const { loginUser } = useRequestService();
 
   const onError = (err) => {
     notifyError(err);
   };
 
   const onSubmit = (values) => {
-    request(
-      `${process.env.REACT_APP_FETCH_TEMPLATE}/login`,
-      "POST",
-      JSON.stringify(values)
-    )
-      .then(onRequest)
-      .catch(onError);
+    loginUser(values).then(onRequest).catch(onError);
   };
 
   const onRequest = (data) => {

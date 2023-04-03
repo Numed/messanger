@@ -1,14 +1,14 @@
 import { useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 
-import { useHttp } from "../../hooks/https.hook";
+import useRequestService from "../../services/index";
 import { LoginContext } from "../Context";
 import { notifyError } from "../../helpers/notifications";
 
 export const useSignIn = () => {
   const [loading, setLoading] = useState(false);
   const { setLogined, setUser } = useContext(LoginContext);
-  const { request } = useHttp();
+  const { registerBySocialUser } = useRequestService();
 
   const onReceive = (data) => {
     const dataReceive = data;
@@ -30,13 +30,7 @@ export const useSignIn = () => {
       };
     }
 
-    request(
-      `${process.env.REACT_APP_FETCH_TEMPLATE}/registrationSocial`,
-      "POST",
-      JSON.stringify(outputData)
-    )
-      .then(signUp)
-      .catch(onError);
+    registerBySocialUser(outputData).then(signUp).catch(onError);
   };
 
   const signUp = (data) => {
@@ -44,6 +38,7 @@ export const useSignIn = () => {
     setUser({
       name: data.name,
       image: data.image,
+      email: data.email,
       token: data.token
         ? (data.token, localStorage.setItem("token", data.token))
         : null,

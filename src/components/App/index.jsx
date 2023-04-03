@@ -10,7 +10,7 @@ import { LoginContext } from "../Context";
 import { onDarkMode } from "../../helpers/theme";
 import { Moon } from "../SideMenu/style";
 import SignInSection from "../SignForms";
-import { useHttp } from "../../hooks/https.hook";
+import useRequestService from "../../services/index";
 import { notifyError } from "../../helpers/notifications";
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
   );
   const [user, setUser] = useState(null);
   const [darkMode, setDarkMode] = useState(localStorage.getItem("dark-mode"));
-  const { request } = useHttp();
+  const { findUser } = useRequestService();
 
   useEffect(() => {
     onDarkMode(darkMode);
@@ -31,13 +31,7 @@ const App = () => {
     const data = {
       id: jwt_decode(localStorage.getItem("token")).userId,
     };
-    request(
-      `${process.env.REACT_APP_FETCH_TEMPLATE}/find`,
-      "POST",
-      JSON.stringify(data)
-    )
-      .then(onReceive)
-      .catch(onError);
+    findUser(data).then(onReceive).catch(onError);
     // eslint-disable-next-line
   }, []);
 
@@ -45,6 +39,7 @@ const App = () => {
     setUser({
       name: data.name,
       image: data.image,
+      email: data.email,
       token: data.token,
     });
     localStorage.setItem("token", data.token);

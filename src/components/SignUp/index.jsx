@@ -16,21 +16,15 @@ import {
   SignUpTitle,
 } from "./styles";
 import { LoginContext } from "../Context";
-import { useHttp } from "../../hooks/https.hook";
+import useRequestService from "../../services/index";
 import { notifyError } from "../../helpers/notifications";
 
 const SignUp = () => {
   const { setLogined, setUser } = useContext(LoginContext);
-  const { request } = useHttp();
+  const { registerUser } = useRequestService();
 
   const onSubmit = (data) => {
-    request(
-      `${process.env.REACT_APP_FETCH_TEMPLATE}/registration`,
-      "POST",
-      JSON.stringify(data)
-    )
-      .then(onRequest)
-      .catch(onError);
+    registerUser(data).then(onRequest).catch(onError);
   };
 
   const onRequest = (data) => {
