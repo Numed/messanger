@@ -20,6 +20,7 @@ body.dark-mode {
 body.dark-mode .avatar-name,
 body.dark-mode .chat-avatar__name,
 body.dark-mode .message-date,
+body.dark-mode .btn-back,
 body.dark-mode .fa-search {
   color: #ffffff;
 }

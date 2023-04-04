@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FaLongArrowAltLeft } from "react-icons/fa";
 
 export const ChatSideContainer = styled.section`
   width: 66%;
@@ -202,7 +203,7 @@ export const BtnSubmit = styled.button`
   }
 `;
 
-export const BtnBack = styled.i`
+export const BtnBack = styled(FaLongArrowAltLeft)`
   display: none;
   @media (max-width: 660px) {
     display: flex;

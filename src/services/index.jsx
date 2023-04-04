@@ -57,6 +57,11 @@ const useRequestService = () => {
     return response;
   };
 
+  const getJoke = async () => {
+    const response = await request("https://api.chucknorris.io/jokes/random");
+    return response;
+  };
+
   return {
     findUser,
     registerUser,
@@ -64,6 +69,7 @@ const useRequestService = () => {
     loginUser,
     updateUser,
     updateMessagesUser,
+    getJoke,
   };
 };
 

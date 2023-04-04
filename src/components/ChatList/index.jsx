@@ -39,6 +39,7 @@ const ChatListSection = () => {
           lastFilteredElementMessage = filterMessage[filterMessage.length - 1],
           countsMessage = countMessage.filter((user) => user.name === name),
           lastCountsMessage = countsMessage[countsMessage.length - 1];
+        console.log(countsMessage, lastCountsMessage);
         return (
           <Chat
             key={i}
@@ -65,7 +66,7 @@ const ChatListSection = () => {
                     sideMenuRef.current.classList.contains("clicked")
                     ? lastCountsMessage.count !== 0
                       ? [
-                          (lastCountsMessage.count = 0),
+                          (lastCountsMessage.count = ""),
                           displayCounter(lastCountsMessage.name, "none"),
                         ]
                       : null
