@@ -26,7 +26,7 @@ const Header = () => {
   const { useDebounce } = useHttp();
   const [searchValue, setSearchValue] = useState("");
   const [isOpenPopup, setOpenPopup] = useState(false);
-  const searchTerm = useDebounce(searchValue.trim().toLowerCase(), 300);
+  const searchTerm = useDebounce(searchValue.trim().toLowerCase(), 200);
   const { logined, setLogined, user, setUser } = useContext(LoginContext);
 
   useEffect(() => {

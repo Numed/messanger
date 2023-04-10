@@ -160,6 +160,7 @@ export const ChatDate = styled.span`
   align-items: baseline;
   justify-content: center;
   height: 35px;
+  width: 65px;
 
   @media (max-width: 780px) {
     justify-content: flex-end;

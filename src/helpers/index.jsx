@@ -9,7 +9,7 @@ export const sortChats = (messages, info) => {
     currentChat.unshift(activeChat[0]);
     //TODO: Забрати локал сторедж
     localStorage.setItem("history-chat-list", JSON.stringify(currentChat));
-    return [...info, currentChat].slice(0, 5);
+    return [...info, currentChat].slice(0, 6);
   }
 };
 
@@ -52,18 +52,4 @@ export const findUser = (searchTerm) => {
       e.parentElement.parentElement.parentElement.classList.remove("hide");
     });
   }
-};
-
-export const checkGoogle = (token) => {
-  fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`);
-};
-
-export const checkGithub = (token) => {
-  fetch(`https://github.com/login/oauth/access_token=${token}`);
-};
-
-export const checkFacebook = (token) => {
-  fetch(
-    `https://www.facebook.com/connect/login_success.html#access_token=${token}`
-  );
 };

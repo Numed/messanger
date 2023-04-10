@@ -54,17 +54,23 @@ const ChatSide = () => {
           .filter((user) => user.name === name)
           .map(({ avatar, name, message, dateNow, isBot }, id) => (
             <TotalDivMessage key={id} ref={totalDiv}>
-              {isBot ? (
-                <CreateInterlocutorMessage
-                  key={id}
-                  avatar={avatar}
-                  name={name}
-                  dateNow={dateNow}
-                  value={message}
-                />
-              ) : (
-                <CreateMyMessage key={id} message={message} dateNow={dateNow} />
-              )}
+              {isBot !== undefined ? (
+                isBot ? (
+                  <CreateInterlocutorMessage
+                    key={id}
+                    avatar={avatar}
+                    name={name}
+                    dateNow={dateNow}
+                    value={message}
+                  />
+                ) : (
+                  <CreateMyMessage
+                    key={id}
+                    message={message}
+                    dateNow={dateNow}
+                  />
+                )
+              ) : null}
             </TotalDivMessage>
           ))
       : null;

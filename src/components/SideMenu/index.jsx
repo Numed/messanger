@@ -31,6 +31,12 @@ const SideMenu = () => {
   useEffect(() => {
     if (messages.length >= 8) {
       setInfo(sortChats(messages, info));
+      const data = [
+        {
+          historyMessages: [...messages],
+          historyOrder: [...info],
+        },
+      ];
     }
     // eslint-disable-next-line
   }, [messages]);
