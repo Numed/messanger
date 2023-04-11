@@ -48,7 +48,7 @@ const useRequestService = () => {
     return response;
   };
 
-  const updateMessagesUser = async (data) => {
+  const saveMessagesUser = async (data) => {
     const response = await request(
       `${process.env.REACT_APP_FETCH_TEMPLATE}/updateMessages`,
       "POST",
@@ -68,7 +68,7 @@ const useRequestService = () => {
     registerBySocialUser,
     loginUser,
     updateUser,
-    updateMessagesUser,
+    saveMessagesUser,
     getJoke,
   };
 };

@@ -26,7 +26,7 @@ const SideMenu = () => {
   const [countMessage, setCountMessage] = useState([]);
 
   const sideMenuRef = useRef();
-  const { updateMessagesUser } = useRequestService();
+  const { saveMessagesUser } = useRequestService();
 
   useEffect(() => {
     if (user !== null) {
@@ -43,7 +43,7 @@ const SideMenu = () => {
           historyMessages: [...messages],
           historyOrder: [...info],
         };
-        updateMessagesUser(data).then(onReceive).catch(onError);
+        saveMessagesUser(data).then(onReceive).catch(onError);
       }
     }
     // eslint-disable-next-line
