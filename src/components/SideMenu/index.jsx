@@ -21,7 +21,6 @@ const SideMenu = () => {
   const { user } = useContext(LoginContext);
 
   const [info, setInfo] = useState(contacts);
-  const [loading, setLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [messages, setMessages] = useState(contacts);
   const [countMessage, setCountMessage] = useState([]);
@@ -31,8 +30,8 @@ const SideMenu = () => {
 
   useEffect(() => {
     if (user !== null) {
-      setInfo(user.messages.historyOrder);
       setMessages(user.messages.historyMessages);
+      setInfo(user.messages.historyOrder);
     }
   }, [user]);
 

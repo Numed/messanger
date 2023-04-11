@@ -43,6 +43,7 @@ const SignIn = () => {
       email: data.email,
       image: data.image,
       token: data.token,
+      messages: data.messages,
     });
     localStorage.setItem("token", data.token);
     setLogined(true);
