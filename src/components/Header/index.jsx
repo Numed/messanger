@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { FaSearch, FaCaretDown } from "react-icons/fa";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import { useHttp } from "../../hooks/https.hook";
 import {
@@ -20,7 +21,7 @@ import {
 import { findUser } from "../../helpers";
 import { LoginContext, PopupContext } from "../Context";
 import UpdrageSection from "../UpdrageSection";
-import avatarTemplate from "../../img/avatar.png";
+import { SingleSkeleton, CircleSkeleton } from "../../helpers/skeleton";
 
 const Header = () => {
   const { useDebounce } = useHttp();
@@ -44,14 +45,18 @@ const Header = () => {
   const LoginContent = () => {
     return (
       <AvatarContainer>
-        <Avatar bg={user !== null ? user.image : avatarTemplate} />
+        {user !== null ? <Avatar bg={user.image} /> : <CircleSkeleton />}
         <DropdownContainer>
           <FaCaretDown className="fa fa-caret-down" />
           <DropdownMenu className="drop-down__menu">
             <DropdownLink>
-              <AvatarName className="welcome-message">
-                Signed in as <span>{user !== null ? user.name : "User"}</span>
-              </AvatarName>
+              {user !== null ? (
+                <AvatarName className="welcome-message">
+                  Signed in as <span>{user.name}</span>
+                </AvatarName>
+              ) : (
+                <SingleSkeleton />
+              )}
             </DropdownLink>
             <DropdownLink>
               <UpdateButton onClick={() => setOpenPopup(true)}>

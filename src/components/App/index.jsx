@@ -41,10 +41,11 @@ const App = () => {
       image: data.image,
       email: data.email,
       token: data.token,
+      messages: data.messages,
     });
     localStorage.setItem("token", data.token);
-    setLogined(true);
     localStorage.setItem("logined", true);
+    setLogined(true);
   };
 
   const onError = (e) => {

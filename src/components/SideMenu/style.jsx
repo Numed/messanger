@@ -8,6 +8,16 @@ export const Container = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+
+  & > .list-skeleton {
+    width: 475px;
+    height: 555px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   @media (max-width: 660px) {
     justify-content: flex-start;
     align-items: center;

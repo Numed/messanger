@@ -33,7 +33,6 @@ const ChatSide = () => {
   const { name } = selectedUser;
 
   useEffect(() => {
-    localStorage.setItem("history-messages", JSON.stringify(messages));
     onScrollToBottom();
   }, [messages]);
 

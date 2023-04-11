@@ -1,4 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import {
   Container,
   SideMenuContainer,
@@ -6,40 +8,55 @@ import {
   WaitMessage,
 } from "./style";
 import ChatSide from "../ChatSide";
-import { InfoContext, ChatListContext } from "../Context";
+import { InfoContext, ChatListContext, LoginContext } from "../Context";
 import ErrorBoundary from "../ErrorBoundary";
 import { contacts } from "../Constants";
 import { sortChats } from "../../helpers";
 import ChatListSection from "../ChatList";
+import useRequestService from "../../services";
+import { notifyError } from "../../helpers/notifications";
+import { ListSkeleton } from "../../helpers/skeleton";
 
 const SideMenu = () => {
-  const [info, setInfo] = useState(
-    localStorage.getItem("history-chat-list")
-      ? JSON.parse(localStorage.getItem("history-chat-list"))
-      : contacts
-  );
+  const { user } = useContext(LoginContext);
+
+  const [info, setInfo] = useState(contacts);
+  const [loading, setLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [messages, setMessages] = useState(
-    localStorage.getItem("history-messages")
-      ? JSON.parse(localStorage.getItem("history-messages"))
-      : contacts
-  );
+  const [messages, setMessages] = useState(contacts);
   const [countMessage, setCountMessage] = useState([]);
 
   const sideMenuRef = useRef();
+  const { updateMessagesUser } = useRequestService();
+
+  useEffect(() => {
+    if (user !== null) {
+      setInfo(user.messages.historyOrder);
+      setMessages(user.messages.historyMessages);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (messages.length >= 8) {
-      setInfo(sortChats(messages, info));
-      const data = [
-        {
+      if (user !== null) {
+        const data = {
+          email: user.email,
           historyMessages: [...messages],
           historyOrder: [...info],
-        },
-      ];
+        };
+        updateMessagesUser(data).then(onReceive).catch(onError);
+      }
     }
     // eslint-disable-next-line
   }, [messages]);
+
+  const onReceive = () => {
+    setInfo(sortChats(messages, info));
+  };
+
+  const onError = (error) => {
+    notifyError(error);
+  };
 
   const content =
     selectedUser !== null ? (
@@ -65,20 +82,25 @@ const SideMenu = () => {
   return (
     <>
       <Container>
-        <SideMenuContainer ref={sideMenuRef} className="side-container">
-          <ChatListContext.Provider
-            value={{
-              selectedUser,
-              setSelectedUser,
-              countMessage,
-              sideMenuRef,
-              info,
-              messages,
-            }}
-          >
-            <ChatListSection />
-          </ChatListContext.Provider>
-        </SideMenuContainer>
+        {user !== null ? (
+          <SideMenuContainer ref={sideMenuRef} className="side-container">
+            <ChatListContext.Provider
+              value={{
+                selectedUser,
+                setSelectedUser,
+                countMessage,
+                sideMenuRef,
+                info,
+                messages,
+              }}
+            >
+              <ChatListSection />
+            </ChatListContext.Provider>
+          </SideMenuContainer>
+        ) : (
+          ListSkeleton()
+        )}
+
         {content}
       </Container>
     </>

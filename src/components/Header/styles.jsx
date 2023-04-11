@@ -84,6 +84,12 @@ export const AvatarContainer = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  width: 60px;
+
+  & > .avatar-skeleton {
+    width: 50%;
+    height: 30px;
+  }
 
   &:hover .drop-down__menu {
     display: flex;
