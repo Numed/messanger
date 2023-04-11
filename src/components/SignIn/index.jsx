@@ -46,8 +46,8 @@ const SignIn = () => {
       messages: data.messages,
     });
     localStorage.setItem("token", data.token);
-    setLogined(true);
     localStorage.setItem("logined", true);
+    setLogined(true);
   };
 
   return (
