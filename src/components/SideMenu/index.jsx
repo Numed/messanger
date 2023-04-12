@@ -21,15 +21,15 @@ const SideMenu = () => {
   const { user } = useContext(LoginContext);
 
   const [info, setInfo] = useState(contacts);
-  const [selectedUser, setSelectedUser] = useState(null);
   const [messages, setMessages] = useState(contacts);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [countMessage, setCountMessage] = useState([]);
 
   const sideMenuRef = useRef();
   const { saveMessagesUser } = useRequestService();
 
   useEffect(() => {
-    if (user !== null) {
+    if (user !== null && user.messages !== undefined) {
       setMessages(user.messages.historyMessages);
       setInfo(user.messages.historyOrder);
     }

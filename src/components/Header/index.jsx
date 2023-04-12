@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from "react";
 import { FaSearch, FaCaretDown } from "react-icons/fa";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import { useHttp } from "../../hooks/https.hook";
 import {
   Input,
   HeaderContainer,
@@ -24,10 +23,9 @@ import UpdrageSection from "../UpdrageSection";
 import { SingleSkeleton, CircleSkeleton } from "../../helpers/skeleton";
 
 const Header = () => {
-  const { useDebounce } = useHttp();
   const [searchValue, setSearchValue] = useState("");
   const [isOpenPopup, setOpenPopup] = useState(false);
-  const searchTerm = useDebounce(searchValue.trim().toLowerCase(), 200);
+  const searchTerm = searchValue.trim().toLowerCase();
   const { logined, setLogined, user, setUser } = useContext(LoginContext);
 
   useEffect(() => {

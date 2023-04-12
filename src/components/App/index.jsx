@@ -26,10 +26,6 @@ const App = () => {
     // eslint-disable-next-line
   }, [darkMode]);
 
-  /* TODO: 
-            - Придумати як відрізняти, коли треба відправляти Joke, а коли вебсокет;
-            - Приєднання по сокетам;
-    */
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) return;

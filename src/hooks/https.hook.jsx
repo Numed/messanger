@@ -1,19 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useCallback } from "react";
 
 export const useHttp = () => {
-  const useDebounce = (value, delay) => {
-    const [debouncedValue, setDebouncedValue] = useState(value);
-    useEffect(() => {
-      const handler = setTimeout(() => {
-        setDebouncedValue(value);
-      }, delay);
-      return () => {
-        clearTimeout(handler);
-      };
-    }, [value, delay]);
-    return debouncedValue;
-  };
-
   const request = useCallback(
     async (
       url,
@@ -42,5 +29,5 @@ export const useHttp = () => {
     []
   );
 
-  return { useDebounce, request };
+  return { request };
 };
