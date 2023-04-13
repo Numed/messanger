@@ -68,3 +68,12 @@ body.dark-mode .welcome-message,
 body.dark-mode .sign-message{
   color: #d9d9d9;
 }
+
+body.dark-mode .message,
+body.dark-mode .avatar-message{
+  color: #9196a3;
+}
+
+body.dark-mode .chat:hover{
+  background: #3e3c3c;
+}

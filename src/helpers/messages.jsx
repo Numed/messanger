@@ -30,7 +30,7 @@ export const CreateInterlocutorMessage = ({ avatar, name, value, dateNow }) => {
       <Avatar src={avatar} alt={name} />
       <MessageContainer>
         <InterlocutorMessage className="message-text">
-          <MessageText>{value}</MessageText>
+          <MessageText className="message">{value}</MessageText>
         </InterlocutorMessage>
         <Date className="message-date">{dateNow}</Date>
       </MessageContainer>

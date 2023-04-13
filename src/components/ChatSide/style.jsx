@@ -88,6 +88,7 @@ export const MessageContainer = styled.div`
 
 export const MyMessageContainer = styled(MessageContainer)`
   align-items: flex-end;
+  color: rgb(65, 68, 74);
 `;
 
 export const InterlocutorContainer = styled.div`
@@ -105,6 +106,7 @@ export const InterlocutorContainer = styled.div`
 export const InterlocutorMessage = styled.div`
   display: flex;
   background: #f1f2f7;
+  color: rgb(65, 68, 74);
   border-radius: 8px;
   padding: 10px;
   margin: 10px 0 0 10px;
@@ -122,7 +124,6 @@ export const MessageText = styled.p`
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
-  color: #9196a3;
 `;
 
 export const MyMessageText = styled(MessageText)`

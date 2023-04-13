@@ -74,7 +74,7 @@ const ChatListSection = () => {
               </MessageCount>
               <AvatarInfo>
                 <AvatarName className="avatar-name">{name}</AvatarName>
-                <AvatarMessage>
+                <AvatarMessage className="avatar-message">
                   {filterMessage.length === 0
                     ? message
                     : lastFilteredElementMessage.message.length > 30

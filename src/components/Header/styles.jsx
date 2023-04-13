@@ -67,7 +67,8 @@ export const Input = styled.input`
   &:active,
   &:focus {
     border: none;
-    outline: none;
+    outline-offset: 2px;
+    padding-left: 5px;
 
     &::-webkit-input-placeholder {
       color: transparent;

@@ -67,7 +67,8 @@ export const Chat = styled.div`
   }
 
   &:hover {
-    transform: scale(1.05);
+    background: #f0ebeb;
+    opacity: 0.8;
     transition: all 0.25s ease-in-out;
   }
 
@@ -157,7 +158,7 @@ export const AvatarMessage = styled.h4`
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  color: #c9c9cf;
+  color: rgb(65, 68, 74);
 `;
 
 export const ChatDate = styled.span`
