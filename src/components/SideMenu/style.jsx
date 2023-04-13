@@ -202,8 +202,9 @@ export const Moon = styled(FaMoon)`
   }
 
   @media (max-width: 660px) {
-    left: 93%;
+    left: 90%;
     display: block;
+    top: 5%;
   }
 
   @media (max-width: 400px) {

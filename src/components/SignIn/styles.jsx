@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Field } from "formik";
+import { Field, Form } from "formik";
 
 export const FormInner = styled.div`
   width: 100%;
@@ -10,7 +10,7 @@ export const FormInner = styled.div`
 
   @media (max-width: 426px) {
     flex-direction: column-reverse;
-    height: 75%;
+    height: 55%;
   }
 `;
 
@@ -117,7 +117,7 @@ export const LoginSection = styled.div`
   flex-direction: column;
 
   @media (max-width: 426px) {
-    width: 50%;
+    width: 80%;
   }
 
   @media (max-width: 380px) {
@@ -174,9 +174,18 @@ export const BtnLogin = styled.button`
   font-size: 14px;
   cursor: pointer;
   border: none;
+  margin: 0 auto;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     opacity: 0.8;
     transition: all 0.2s ease-in-out;
   }
+`;
+
+export const FormikForm = styled(Form)`
+  width: 80%;
 `;

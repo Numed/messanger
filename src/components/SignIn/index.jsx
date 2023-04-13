@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { LoginSocialGithub, LoginSocialFacebook } from "reactjs-social-login";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { Formik, Form } from "formik";
+import { Formik } from "formik";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 
 import {
@@ -17,6 +17,7 @@ import {
   FormInput,
   BtnLogin,
   FormInner,
+  FormikForm,
 } from "./styles";
 import { SigninSchema } from "../SignForms/validateForms";
 import { useSignIn } from "./useSignIn";
@@ -115,7 +116,7 @@ const SignIn = () => {
             }}
           >
             {({ errors, touched }) => (
-              <Form>
+              <FormikForm>
                 <InputSection>
                   <InputLabel>Email</InputLabel>
                   {errors.email && touched.email ? (
@@ -131,7 +132,7 @@ const SignIn = () => {
                   <FormInput type="password" name="password" required />
                 </InputSection>
                 <BtnLogin type="submit">Sign in</BtnLogin>
-              </Form>
+              </FormikForm>
             )}
           </Formik>
         </LoginSection>

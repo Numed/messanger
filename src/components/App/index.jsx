@@ -26,7 +26,6 @@ const App = () => {
     // eslint-disable-next-line
   }, [darkMode]);
 
-
   useEffect(() => {
     if (localStorage.getItem("token") === null) return;
     const data = {
