@@ -27,7 +27,7 @@ import useChatSide from "./useChatSide";
 const ChatSide = () => {
   const chatSideRef = useRef(),
     totalDiv = useRef();
-  const { handlerSubmit, value, setValue, error } = useChatSide();
+  const { handlerSubmit, value, setValue, error, socketSubmit } = useChatSide();
 
   const { selectedUser, messages } = useContext(InfoContext);
   const { name } = selectedUser;
@@ -97,7 +97,9 @@ const ChatSide = () => {
                 value={value}
                 onKeyUp={(e) => {
                   if (e.key === "Enter") {
-                    handlerSubmit(e);
+                    name === "Group chat" && value !== ""
+                      ? socketSubmit(e)
+                      : handlerSubmit(e);
                   }
                 }}
                 onInput={(e) => setValue(e.target.value)}
@@ -105,7 +107,11 @@ const ChatSide = () => {
               />
               <BtnSubmit
                 className="btn-submit"
-                onClick={(e) => handlerSubmit(e)}
+                onClick={(e) =>
+                  name === "Group Chat" && value !== ""
+                    ? socketSubmit(e)
+                    : handlerSubmit(e)
+                }
               >
                 <FaPaperPlane />
               </BtnSubmit>
