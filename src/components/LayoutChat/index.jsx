@@ -7,6 +7,7 @@ import {
   MyContainer,
   MyMessage,
   MyMessageText,
+  InterlocutorName,
   Date,
 } from "../ChatSide/style";
 import { Avatar } from "../SideMenu/style";
@@ -17,9 +18,12 @@ const Layout = () => {
   const { name, avatar, message } = selectedUser;
   return (
     <>
-      <InterlocutorContainer>
+      <InterlocutorContainer className="first-section__layout">
         <Avatar src={avatar} alt={name} />
         <MessageContainer>
+          <InterlocutorName className="interlocutor-name">
+            {name}
+          </InterlocutorName>
           <InterlocutorMessage className="message-text">
             <MessageText>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
@@ -45,6 +49,9 @@ const Layout = () => {
       <InterlocutorContainer>
         <Avatar src={avatar} alt={name} />
         <MessageContainer>
+          <InterlocutorName className="interlocutor-name">
+            {name}
+          </InterlocutorName>
           <InterlocutorMessage className="message-text">
             <MessageText>{message}</MessageText>
           </InterlocutorMessage>

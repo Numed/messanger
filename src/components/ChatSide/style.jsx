@@ -96,11 +96,22 @@ export const InterlocutorContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 20px;
 
   @media (max-width: 660px) {
     margin-top: 15px;
   }
+
+  &.first-section__layout {
+    margin-top: 200px;
+  }
+`;
+
+export const InterlocutorName = styled.h4`
+  font-size: 10px;
+  line-height: 12px;
+  color: rgb(65, 68, 74);
+  margin: 5px 0px 0px 10px;
 `;
 
 export const InterlocutorMessage = styled.div`

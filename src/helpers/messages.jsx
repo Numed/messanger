@@ -8,6 +8,7 @@ import {
   InterlocutorMessage,
   MessageContainer,
   MessageText,
+  InterlocutorName,
 } from "../components/ChatSide/style";
 import { Avatar } from "../components/SideMenu/style";
 
@@ -24,11 +25,20 @@ export const CreateMyMessage = ({ message, dateNow }) => {
   );
 };
 
-export const CreateInterlocutorMessage = ({ avatar, name, value, dateNow }) => {
+export const CreateInterlocutorMessage = ({
+  avatar,
+  name,
+  userName,
+  value,
+  dateNow,
+}) => {
   return (
     <InterlocutorContainer className="interlocutor-container">
       <Avatar src={avatar} alt={name} />
       <MessageContainer>
+        <InterlocutorName className="interlocutor-name">
+          {userName !== undefined ? userName : name}
+        </InterlocutorName>
         <InterlocutorMessage className="message-text">
           <MessageText className="message">{value}</MessageText>
         </InterlocutorMessage>

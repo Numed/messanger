@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { notifyAvatar } from "../../helpers/notifications";
 import useRequestService from "../../services";
 import { getFullDate } from "../../helpers/data";
-import { InfoContext } from "../Context";
+import { InfoContext, LoginContext } from "../Context";
 const socket = io("http://localhost:5000");
 
 const useChatSide = () => {
@@ -14,25 +14,32 @@ const useChatSide = () => {
   const { dateNow, dateSide } = getFullDate();
   const { selectedUser, messages, setMessages, setCountMessage } =
     useContext(InfoContext);
+  const { user } = useContext(LoginContext);
   const { name, avatar } = selectedUser;
 
   let counter = 0;
 
   useEffect(() => {
-    socket.on("messageResponse", ({ name, message, date, dateNow, isBot }) => {
-      setMessages([
-        ...messages,
-        {
-          name,
-          message,
-          date,
-          dateNow,
-          isBot,
-        },
-      ]);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    socket.on(
+      "messageResponse",
+      ({ name, userName, message, avatar, date, dateNow, isBot }) => {
+        setMessages([
+          ...messages,
+          {
+            userName,
+            name,
+            avatar,
+            message,
+            date,
+            dateNow,
+            isBot,
+          },
+        ]);
+        notifyAvatar(message, avatar, name, selectedUser);
+      }
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages]);
 
   const handlerSubmit = async () => {
     if (value !== "") {
@@ -56,10 +63,12 @@ const useChatSide = () => {
       socket.emit("socketSubmit", {
         socket: socket.id,
         name: name,
-        message: value.trim(),
+        avatar: user.image,
+        userName: user.name,
         date: dateSide,
+        message: value.trim(),
         dateNow: dateNow,
-        isBot: false,
+        isBot: true,
       });
       setValue("");
     }

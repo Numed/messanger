@@ -51,13 +51,14 @@ const ChatSide = () => {
     !error && messages.length > 6
       ? messages
           .filter((user) => user.name === name)
-          .map(({ avatar, name, message, dateNow, isBot }, id) => (
+          .map(({ avatar, name, userName, message, dateNow, isBot }, id) => (
             <TotalDivMessage key={id} ref={totalDiv}>
               {isBot !== undefined ? (
                 isBot ? (
                   <CreateInterlocutorMessage
                     key={id}
                     avatar={avatar}
+                    userName={userName}
                     name={name}
                     dateNow={dateNow}
                     value={message}
