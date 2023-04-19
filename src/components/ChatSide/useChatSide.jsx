@@ -5,7 +5,7 @@ import { notifyAvatar } from "../../helpers/notifications";
 import useRequestService from "../../services";
 import { getFullDate } from "../../helpers/data";
 import { InfoContext, LoginContext } from "../Context";
-const socket = io("http://localhost:5000");
+const socket = io(process.env.REACT_APP_FETCH_BASE);
 
 const useChatSide = () => {
   const [value, setValue] = useState("");
@@ -23,22 +23,36 @@ const useChatSide = () => {
     socket.on(
       "messageResponse",
       ({ name, userName, message, avatar, date, dateNow, isBot }) => {
-        setMessages([
-          ...messages,
-          {
-            userName,
-            name,
-            avatar,
-            message,
-            date,
-            dateNow,
-            isBot,
-          },
-        ]);
-        notifyAvatar(message, avatar, name, selectedUser);
+        if (userName === user.name) {
+          setMessages([
+            ...messages,
+            {
+              userName,
+              name,
+              avatar,
+              message,
+              date,
+              dateNow,
+              isBot: !isBot,
+            },
+          ]);
+        } else {
+          setMessages([
+            ...messages,
+            {
+              userName,
+              name,
+              avatar,
+              message,
+              date,
+              dateNow,
+              isBot,
+            },
+          ]);
+        }
       }
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
 
   const handlerSubmit = async () => {
