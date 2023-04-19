@@ -35,6 +35,10 @@ const App = () => {
     // eslint-disable-next-line
   }, []);
 
+  /* TODO: 
+            - Прокинути повідомлення на сокетах;
+    */
+
   const onReceive = (data) => {
     setUser({
       name: data.name,

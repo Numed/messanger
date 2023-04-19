@@ -24,6 +24,7 @@ const ChatListSection = () => {
     messages,
   } = useContext(ChatListContext);
 
+  
   const switchMenu = () => {
     const chatSide = document.querySelector(".switch");
     if (chatSide) {
