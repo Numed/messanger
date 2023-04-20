@@ -46,3 +46,24 @@ export const notifyError = (error) => {
     theme: localStorage.getItem("dark-mode"),
   });
 };
+
+export const notifyAvatarSocket = (message, avatar, name, userName) => {
+  return toast(
+    <ToastifyMessage
+      message={message}
+      avatar={avatar}
+      name={name}
+      userName={userName}
+    />,
+    {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: localStorage.getItem("dark-mode"),
+    }
+  );
+};

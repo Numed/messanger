@@ -1,14 +1,23 @@
 import { useState, useContext, useEffect } from "react";
 import io from "socket.io-client";
 
-import { notifyAvatar } from "../../helpers/notifications";
+import { notifyAvatarSocket, notifyAvatar } from "../../helpers/notifications";
 import useRequestService from "../../services";
 import { getFullDate } from "../../helpers/data";
 import { InfoContext, LoginContext } from "../Context";
-const socket = io(process.env.REACT_APP_FETCH_BASE);
+
+const options = {
+  "force new connection": true,
+  reconnectionAttempts: "Infinity",
+  timeout: 10000,
+  transports: ["websocket"],
+};
+
+let socket = io(process.env.REACT_APP_FETCH_BASE, options);
 
 const useChatSide = () => {
   const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const { getJoke } = useRequestService();
   const { dateNow, dateSide } = getFullDate();
@@ -23,37 +32,44 @@ const useChatSide = () => {
     socket.on(
       "messageResponse",
       ({ name, userName, message, avatar, date, dateNow, isBot }) => {
-        if (userName === user.name) {
-          setMessages([
-            ...messages,
-            {
-              userName,
-              name,
-              avatar,
-              message,
-              date,
-              dateNow,
-              isBot: !isBot,
-            },
-          ]);
-        } else {
-          setMessages([
-            ...messages,
-            {
-              userName,
-              name,
-              avatar,
-              message,
-              date,
-              dateNow,
-              isBot,
-            },
-          ]);
+        if (selectedUser.name !== name) {
+          return onReceive(
+            name,
+            userName,
+            message,
+            avatar,
+            date,
+            dateNow,
+            isBot
+          );
         }
       }
     );
+    return () => {
+      socket.off("messageResponse");
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messages]);
+  }, []);
+
+  const onReceive = (name, userName, message, avatar, date, dateNow, isBot) => {
+    if (loading === true) return;
+    setMessages([
+      ...messages,
+      {
+        userName,
+        name,
+        avatar,
+        message,
+        date,
+        dateNow,
+        isBot,
+      },
+    ]);
+    setCountMessage((old) => [...old, { name, count: counter++ }]);
+    notifyAvatarSocket(message, avatar, userName, userName);
+    setLoading(false);
+    return counter;
+  };
 
   const handlerSubmit = async () => {
     if (value !== "") {
@@ -75,7 +91,6 @@ const useChatSide = () => {
   const socketSubmit = () => {
     if (value !== "") {
       socket.emit("socketSubmit", {
-        socket: socket.id,
         name: name,
         avatar: user.image,
         userName: user.name,
@@ -84,6 +99,16 @@ const useChatSide = () => {
         dateNow: dateNow,
         isBot: true,
       });
+      setMessages([
+        ...messages,
+        {
+          name: name,
+          message: value.trim(),
+          date: dateSide,
+          dateNow: dateNow,
+          isBot: false,
+        },
+      ]);
       setValue("");
     }
   };
