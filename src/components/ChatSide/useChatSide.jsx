@@ -17,7 +17,6 @@ let socket = io(process.env.REACT_APP_FETCH_BASE, options);
 
 const useChatSide = () => {
   const [value, setValue] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const { getJoke } = useRequestService();
   const { dateNow, dateSide } = getFullDate();
@@ -62,10 +61,9 @@ const useChatSide = () => {
       socket.off("messageResponse");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [messages]);
 
   const onReceive = (name, userName, message, avatar, date, dateNow, isBot) => {
-    if (loading === true) return;
     setMessages([
       ...messages,
       {
@@ -80,7 +78,6 @@ const useChatSide = () => {
     ]);
     setCountMessage((old) => [...old, { name, count: counter++ }]);
     notifyAvatarSocket(message, avatar, userName, userName);
-    setLoading(false);
     return counter;
   };
 
