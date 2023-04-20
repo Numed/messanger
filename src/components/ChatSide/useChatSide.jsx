@@ -32,7 +32,20 @@ const useChatSide = () => {
     socket.on(
       "messageResponse",
       ({ name, userName, message, avatar, date, dateNow, isBot }) => {
-        if (selectedUser.name !== name) {
+        if (userName === user.name) {
+          setMessages([
+            ...messages,
+            {
+              userName,
+              name,
+              avatar,
+              message,
+              date,
+              dateNow,
+              isBot: !isBot,
+            },
+          ]);
+        } else {
           return onReceive(
             name,
             userName,
@@ -99,16 +112,6 @@ const useChatSide = () => {
         dateNow: dateNow,
         isBot: true,
       });
-      setMessages([
-        ...messages,
-        {
-          name: name,
-          message: value.trim(),
-          date: dateSide,
-          dateNow: dateNow,
-          isBot: false,
-        },
-      ]);
       setValue("");
     }
   };
