@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { FaLongArrowAltLeft } from "react-icons/fa";
 
 export const ChatSideContainer = styled.section`
